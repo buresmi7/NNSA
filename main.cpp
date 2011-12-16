@@ -36,7 +36,7 @@ int main()
 	int NP; double F; double CR; int Generations;
 	std::cout << "zadej velikost populace (60): ";
 	std::cin >> NP;
-	std::cout << "zadej mutacni konstantu (0.2): ";
+	std::cout << "zadej mutacni konstantu (0.3): ";
 	std::cin >> F;
 	std::cout << "zadej prah krizeni (0.7): ";
 	std::cin >> CR;
