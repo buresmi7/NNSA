@@ -47,7 +47,7 @@ void Objekt::posunLeft(){
 		pozice_x -= 1;
 }
 void Objekt::posunRight(){
-	if(pozice_x < (int)app->GetWidth() - sirka)
+	if(pozice_x < space->getSirka() - sirka)
 		pozice_x += 1;
 }
 void Objekt::posunUp(){
@@ -64,7 +64,7 @@ void Objekt::posunLeftD(){
 		pozice_x -= 2;
 }
 void Objekt::posunRightD(){
-	if(pozice_x < (int)app->GetWidth() - sirka)
+	if(pozice_x < space->getSirka() - sirka)
 		pozice_x += 2;
 }
 void Objekt::posunUpD(){
@@ -72,7 +72,7 @@ void Objekt::posunUpD(){
 		pozice_y -= 2;
 }
 void Objekt::posunDownD(){
-	if(pozice_y < (int)app->GetHeight() - vyska)
+	if(pozice_y < space->getVyska() - vyska)
 		pozice_y += 2;
 }
 /***************************************/

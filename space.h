@@ -31,6 +31,8 @@ public:
 	void addController(Controller *c);
 	void ProvedKolo();
 	void VykresliVsechny();
+	int getVyska(){return vyska;};
+	int getSirka(){return sirka;};
 };
 
 #endif

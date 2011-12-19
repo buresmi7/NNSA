@@ -2,8 +2,15 @@
 
 Space::Space(sf::RenderWindow *App){
 	this->App = App;
-	vyska = App->GetHeight();
-	sirka = App->GetWidth();
+	// pokud je App == NULL => program byl spusten jako generator -> okeni system je vypnuty
+	if(App == NULL){		
+		vyska = 300;
+		sirka = 400;
+	}
+	else{
+		vyska = App->GetHeight();
+		sirka = App->GetWidth();
+	}
 	citac = 0;
 	//srand((unsigned int)time(0));
 
@@ -23,10 +30,6 @@ void Space::addController(Controller *c){
 	c->addPoleObjektu(&pole);
 	nove.insert(c);
 }bool Space::CircleTest(Objekt *a, Objekt *b){
-	/*double c = std::sqrt((float)(std::pow((double)(a->getPoziceX()+20 - b->getPoziceX()+20),2) + std::pow((double)(a->getPoziceY()+20 - b->getPoziceX()+20),2)));
-	if(c < 40)
-		return true;
-	return false;*/
 	return (abs(a->getPoziceX() - b->getPoziceX()) * 2 < (80)) &&
          (abs(a->getPoziceY() - b->getPoziceY()) * 2 < (80));
 }
