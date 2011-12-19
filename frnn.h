@@ -151,17 +151,25 @@ public:
 		
 		//std::cout << "pocitam";
 
-		while(true){
+		//int c = 0;
+		//while(true){
+			for(int i = 0; i < pocet_neuronu; i++){
+				double s = Sum(i, pre_vystupy, vstupy);
+				vystupy[i] = Sigmoid(s);
+			}
+			for(int i = 0; i < pocet_neuronu; i++){
+				pre_vystupy[i] = vystupy[i];
+			}
 			for(int i = 0; i < pocet_neuronu; i++){
 				double s = Sum(i, pre_vystupy, vstupy);
 				vystupy[i] = Sigmoid(s);
 			}
 
-			bool shoduji_se = false;
+			/*bool shoduji_se = false;
 			for(int i = 0; i < pocet_neuronu; i++){
 				//if(vystupy[i] == pre_vystupy[i])
 				//porovnani s toleranci
-				if(vystupy[i] < pre_vystupy[i]+0.0001 || vystupy[i] > pre_vystupy[i]-0.0001)
+				if(vystupy[i] < pre_vystupy[i]+0.000001 || vystupy[i] > pre_vystupy[i]-0.000001)
 					shoduji_se = true;
 				else {
 					shoduji_se = false;
@@ -170,13 +178,16 @@ public:
 			}
 			if(shoduji_se)
 				break;
+			if(c == 20)
+				break;
 			
 			for(int i = 0; i < pocet_neuronu; i++){
 				pre_vystupy[i] = vystupy[i];
 			}
-			std::cout << ".";
-		}
-		std::cout << "*";
+			c++;	*/		
+			//std::cout << ".";
+		//}
+		//std::cout << "*";
 
 		return pre_vystupy;
 	}
