@@ -147,49 +147,23 @@ public:
 		std::vector<double> pre_vystupy(pocet_neuronu, 0);
 		// kontrola delky vstupu
 		if(vstupy.size() != pocet_vstupu)
-			return vystupy;
+			return vystupy;		
 		
-		//std::cout << "pocitam";
+		// vypocetni cast pro kazdy neuron - cas t
+		for(int i = 0; i < pocet_neuronu; i++){
+			double s = Sum(i, pre_vystupy, vstupy);
+			vystupy[i] = Sigmoid(s);
+		}
+		for(int i = 0; i < pocet_neuronu; i++){
+			pre_vystupy[i] = vystupy[i];
+		}
+		// vypocetni cast pro kazdy neuron - cas t+1
+		for(int i = 0; i < pocet_neuronu; i++){
+			double s = Sum(i, pre_vystupy, vstupy);
+			vystupy[i] = Sigmoid(s);
+		}			
 
-		//int c = 0;
-		//while(true){
-			for(int i = 0; i < pocet_neuronu; i++){
-				double s = Sum(i, pre_vystupy, vstupy);
-				vystupy[i] = Sigmoid(s);
-			}
-			for(int i = 0; i < pocet_neuronu; i++){
-				pre_vystupy[i] = vystupy[i];
-			}
-			for(int i = 0; i < pocet_neuronu; i++){
-				double s = Sum(i, pre_vystupy, vstupy);
-				vystupy[i] = Sigmoid(s);
-			}
-
-			/*bool shoduji_se = false;
-			for(int i = 0; i < pocet_neuronu; i++){
-				//if(vystupy[i] == pre_vystupy[i])
-				//porovnani s toleranci
-				if(vystupy[i] < pre_vystupy[i]+0.000001 || vystupy[i] > pre_vystupy[i]-0.000001)
-					shoduji_se = true;
-				else {
-					shoduji_se = false;
-					break;
-				}
-			}
-			if(shoduji_se)
-				break;
-			if(c == 20)
-				break;
-			
-			for(int i = 0; i < pocet_neuronu; i++){
-				pre_vystupy[i] = vystupy[i];
-			}
-			c++;	*/		
-			//std::cout << ".";
-		//}
-		//std::cout << "*";
-
-		return pre_vystupy;
+		return vystupy;
 	}
 
 };
