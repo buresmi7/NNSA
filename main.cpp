@@ -21,7 +21,6 @@ int generator(){
 	std::cout << "zadej pocet generaci (?): ";
 	std::cin >> Generations;
 
-	sf::RenderWindow App(sf::VideoMode(400, 300, 32), "SFML Graphics");
 	DiferencialniEvoluce d(NP, F, CR, Generations, NULL);
 
 	std::cout << "genom:\n";
