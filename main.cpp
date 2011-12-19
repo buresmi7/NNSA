@@ -22,7 +22,7 @@ int generator(){
 	std::cin >> Generations;
 
 	sf::RenderWindow App(sf::VideoMode(400, 300, 32), "SFML Graphics");
-	DiferencialniEvoluce d(NP, F, CR, Generations, &App);
+	DiferencialniEvoluce d(NP, F, CR, Generations, NULL);
 
 	std::cout << "genom:\n";
 	for(int i = 0; i < d.getBest()->getDelkaGenomu(); i++){
@@ -115,7 +115,7 @@ int main(int argc, char **argv){
     opt->addUsage( "" );
 	opt->addUsage( "Usage: " );
     opt->addUsage( "" );
-    opt->addUsage( " -h  --help  				Prints this help " );
+    opt->addUsage( " -h  --help					Prints this help " );
     opt->addUsage( " -g  --generator			Generator neuronove site " ); 
 	opt->addUsage( " -t  --tester input.txt		Testovani neuronove site " ); 
     opt->addUsage( "" );
