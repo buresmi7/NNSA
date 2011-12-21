@@ -10,14 +10,17 @@
 
 using namespace std;
 
-int generator(int NP, double F, double CR, int Generations, int pocet){
+int generator(int NP, double F, double CR, int Generations, int pocet, string soubor){
 	DiferencialniEvoluce d(NP, F, CR, Generations, pocet, NULL);
-	std::cout << "genom:\n";
+	//zapis do souboru
+	ofstream myfile;
+	myfile.open (soubor);	
 	for(int i = 0; i < d.getBest()->getDelkaGenomu(); i++){
-		std::cout << d.getBest()->getVahy()[i] << "\n";
+		myfile << d.getBest()->getVahy()[i] << "\n";
 	}
-	std::cout << "\n";
-
+	myfile << "\n";
+	myfile.close();
+	cout << "nejlepsi jedinec zapsan do souboru " << soubor << endl;
 	return 0;
 }
 
@@ -105,7 +108,7 @@ int main(int argc, char **argv){
     opt->addUsage( "" );
     opt->addUsage( " -h   --help	Zobrazi tuto napovedu " );    
 	opt->addUsage( " -t input.txt	Testovani neuronove site " ); 
-	opt->addUsage( " -g	output.txt	Generator neuronove site " ); 
+	opt->addUsage( " -g output.txt	Generator neuronove site " ); 
 	opt->addUsage( " " );
 	opt->addUsage( "      --NP 60	Velikost populace " );
 	opt->addUsage( "      --F 0.3	Mutacni konstanta " );
@@ -118,11 +121,11 @@ int main(int argc, char **argv){
 	opt->setOption('g');
 	opt->setOption('t');
 
-	opt->setOption( "NP");
-	opt->setOption( "F");
-	opt->setOption( "CR");
-	opt->setOption( "generations");
-	opt->setOption( "pocet");
+	opt->setOption("NP");
+	opt->setOption("F");
+	opt->setOption("CR");
+	opt->setOption("generations");
+	opt->setOption("pocet");
 
 	opt->processCommandArgs(argc, argv);
 
@@ -148,14 +151,14 @@ int main(int argc, char **argv){
 		int Generations = atoi(opt->getValue("generations"));
 		int pocet = atoi(opt->getValue("pocet"));
 		cout << "Generator neuronove site" << endl;
-		generator(NP, F, CR, Generations, pocet);
+		generator(NP, F, CR, Generations, pocet, opt->getValue('g'));
 	}
-	else if(opt->getValue("t") != NULL ) {			
+	else if(opt->getValue('t') != NULL ) {			
 		// nacteni vstupniho souboru
 		std::vector<double> vahy;		
 		double s;
 		ifstream infile;
-		infile.open (opt->getValue( "tester" ));
+		infile.open (opt->getValue('t'));
 		while(!infile.eof()){
 			infile >> s;
 			vahy.push_back(s);
