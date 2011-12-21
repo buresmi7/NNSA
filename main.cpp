@@ -10,8 +10,8 @@
 
 using namespace std;
 
-int generator(int NP, double F, double CR, int Generations){
-	DiferencialniEvoluce d(NP, F, CR, Generations, NULL);
+int generator(int NP, double F, double CR, int Generations, int pocet){
+	DiferencialniEvoluce d(NP, F, CR, Generations, pocet, NULL);
 	std::cout << "genom:\n";
 	for(int i = 0; i < d.getBest()->getDelkaGenomu(); i++){
 		std::cout << d.getBest()->getVahy()[i] << "\n";
@@ -104,23 +104,25 @@ int main(int argc, char **argv){
 	opt->addUsage( "Pouziti: " );
     opt->addUsage( "" );
     opt->addUsage( " -h   --help	Zobrazi tuto napovedu " );    
-	opt->addUsage( " -t   --tester input.txt	Testovani neuronove site " ); 
-	opt->addUsage( " -g   --generator	Generator neuronove site " ); 
+	opt->addUsage( " -t input.txt	Testovani neuronove site " ); 
+	opt->addUsage( " -g	output.txt	Generator neuronove site " ); 
 	opt->addUsage( " " );
-	opt->addUsage( "      --velikost-populace 60 " );
-	opt->addUsage( "      --mutacni-konstanta 0.3 " );
-	opt->addUsage( "      --prah-krizeni 0.9 " );
-	opt->addUsage( "      --pocet-generaci 100 " );
+	opt->addUsage( "      --NP 60	Velikost populace " );
+	opt->addUsage( "      --F 0.3	Mutacni konstanta " );
+	opt->addUsage( "      --CR 0.9	Prah krizeni " );
+	opt->addUsage( "      --generations 100	Pocet kol slechteni populace " );
+	opt->addUsage( "      --pocet 5000	Pocet kol ohodnocovaci funkce " );
     opt->addUsage( "" );
 
 	opt->setFlag( "help", 'h');   /* a flag (takes no argument), supporting long and short form */
-	opt->setFlag( "generator", 'g');
-	opt->setOption( "tester", 't');
+	opt->setOption('g');
+	opt->setOption('t');
 
-	opt->setOption( "velikost-populace");
-	opt->setOption( "mutacni-konstanta");
-	opt->setOption( "prah-krizeni");
-	opt->setOption( "pocet-generaci");
+	opt->setOption( "NP");
+	opt->setOption( "F");
+	opt->setOption( "CR");
+	opt->setOption( "generations");
+	opt->setOption( "pocet");
 
 	opt->processCommandArgs(argc, argv);
 
@@ -132,22 +134,23 @@ int main(int argc, char **argv){
 
 	if( opt->getFlag( "help" ) || opt->getFlag( 'h' ) )
 		opt->printUsage();
-	if( opt->getFlag( "generator" ) || opt->getFlag( 'g' ) ) {
+	if(opt->getValue('g') != NULL ) {
 		// kontrola parametru testeru
-		if(opt->getValue("velikost-populace") == NULL || opt->getValue("mutacni-konstanta") == NULL || opt->getValue("prah-krizeni") == NULL || opt->getValue("pocet-generaci") == NULL){
+		if(opt->getValue("NP") == NULL || opt->getValue("F") == NULL || opt->getValue("CR") == NULL || opt->getValue("generations") == NULL || opt->getValue("pocet") == NULL){
 			cout << "Chybny parametr generatoru" << endl;
 			opt->printUsage(); 
 			delete opt;
 			return 0;
 		}
-		int NP = atoi(opt->getValue("velikost-populace"));
-		double F = atoi(opt->getValue("mutacni-konstanta"));
-		double CR = atoi(opt->getValue("prah-krizeni")); 
-		int Generations = atoi(opt->getValue("pocet-generaci"));
+		int NP = atoi(opt->getValue("NP"));
+		double F = atoi(opt->getValue("F"));
+		double CR = atoi(opt->getValue("CR")); 
+		int Generations = atoi(opt->getValue("generations"));
+		int pocet = atoi(opt->getValue("pocet"));
 		cout << "Generator neuronove site" << endl;
-		generator(NP, F, CR, Generations);
+		generator(NP, F, CR, Generations, pocet);
 	}
-	else if( opt->getValue( "tester" ) != NULL || opt->getValue( "t" ) != NULL ) {			
+	else if(opt->getValue("t") != NULL ) {			
 		// nacteni vstupniho souboru
 		std::vector<double> vahy;		
 		double s;

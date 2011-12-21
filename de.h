@@ -19,12 +19,13 @@ class DiferencialniEvoluce{
 	sf::RenderWindow *App;
 	FRNeuralNetwork* best;	
 	int nej;
+	int pocet_kroku;
 
 	int ohodnoceni(FRNeuralNetwork *f){			
 		Space s(App);	
 		ControllerFRNN *c = new ControllerFRNN(new Lod(App, &s, 200, 150), f);			
 		s.addController(c);
-		for(int j = 0; j < 5000; j++){
+		for(int j = 0; j < pocet_kroku; j++){
 			s.ProvedKolo();				
 		}
 		
@@ -32,7 +33,8 @@ class DiferencialniEvoluce{
 	}
 public:
 	// NP - velikost populace
-	DiferencialniEvoluce(int NP, double F, double CR, int Generations, sf::RenderWindow *App){
+	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_kroku, sf::RenderWindow *App){
+		this->pocet_kroku = pocet_kroku;
 		this->App = App;			
 		//tvorba populace
 		std::cout << "tvorba populace\n";
