@@ -20,27 +20,14 @@ class DiferencialniEvoluce{
 	FRNeuralNetwork* best;	
 	int nej;
 
-	int ohodnoceni(FRNeuralNetwork *f){		
-		//sf::RenderWindow Appp(sf::VideoMode(400, 300, 32), "Jedinec");
-		//Appp.SetFramerateLimit(160);
-		Space s(App);		
-		ControllerFRNN *c = new ControllerFRNN(new Lod(App, &s, 200, 150), f);
-			
+	int ohodnoceni(FRNeuralNetwork *f){			
+		Space s(App);	
+		ControllerFRNN *c = new ControllerFRNN(new Lod(App, &s, 200, 150), f);			
 		s.addController(c);
 		for(int j = 0; j < 5000; j++){
 			s.ProvedKolo();				
 		}
-		// Start game loop
-		/*int j = 0;
-		while (true){       
-			//Appp.Clear();				
-			s.ProvedKolo();
-			//s.VykresliVsechny();
-			
-			//Appp.Display();	
-			j++;
-			if(j == 5000)break;
-		}*/
+		
 		return c->getSkore();
 	}
 public:
@@ -49,13 +36,13 @@ public:
 		this->App = App;			
 		//tvorba populace
 		std::cout << "tvorba populace\n";
-		for(int i = 0; i < NP; i++){
-			FRNeuralNetwork *n = new FRNeuralNetwork();
+		for(int i = 0; i < NP; i++){			
+			FRNeuralNetwork *n = new FRNeuralNetwork();			
 			int o = ohodnoceni(n);
-			while(o == 0){				
+			/*while(o == 0){				
 				n = new FRNeuralNetwork();
 				o = ohodnoceni(n);
-			}
+			}*/
 			//std::cout << "ohodnoceni: " << o << "\n";
 			populace.push_back(std::make_pair(o, n));
 		}
