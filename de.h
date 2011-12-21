@@ -40,12 +40,7 @@ public:
 		std::cout << "tvorba populace\n";
 		for(int i = 0; i < NP; i++){			
 			FRNeuralNetwork *n = new FRNeuralNetwork();			
-			int o = ohodnoceni(n);
-			/*while(o == 0){				
-				n = new FRNeuralNetwork();
-				o = ohodnoceni(n);
-			}*/
-			//std::cout << "ohodnoceni: " << o << "\n";
+			int o = ohodnoceni(n);			
 			populace.push_back(std::make_pair(o, n));
 		}
 

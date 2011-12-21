@@ -10,11 +10,16 @@
 
 using namespace std;
 
-int generator(int NP, double F, double CR, int Generations, int pocet, string soubor){
+int generator(int NP, double F, double CR, int Generations, int pocet, char* soubor){
+	cout << "Parametry diferencialni evoluce" << endl;
+	cout << "NP = " << NP << endl;
+	cout << "F = " << F  << endl;
+	cout << "CR = " << CR << endl;
+	cout << "Generations = " << Generations << endl;
 	DiferencialniEvoluce d(NP, F, CR, Generations, pocet, NULL);
 	//zapis do souboru
 	ofstream myfile;
-	myfile.open (soubor);	
+	myfile.open(soubor);	
 	for(int i = 0; i < d.getBest()->getDelkaGenomu(); i++){
 		myfile << d.getBest()->getVahy()[i] << "\n";
 	}
@@ -146,8 +151,8 @@ int main(int argc, char **argv){
 			return 0;
 		}
 		int NP = atoi(opt->getValue("NP"));
-		double F = atoi(opt->getValue("F"));
-		double CR = atoi(opt->getValue("CR")); 
+		double F = atof(opt->getValue("F"));
+		double CR = atof(opt->getValue("CR")); 
 		int Generations = atoi(opt->getValue("generations"));
 		int pocet = atoi(opt->getValue("pocet"));
 		cout << "Generator neuronove site" << endl;

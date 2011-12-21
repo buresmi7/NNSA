@@ -25,14 +25,7 @@ std::vector<double> Controller::nejblizsiObjekty(int pocetObjektu){
 	std::set<Controller*>::iterator j;
 	for(j=pole->begin(); j!=pole->end(); j++){
 		n.push_back(std::make_pair((*j)->getObjekt()->getPoziceX(), (*j)->getObjekt()->getPoziceY()));
-	}
-
-	/*std::cout << "neserazene pole: \n";
-	std::vector<std::pair<int, int> >::iterator i;
-	for(i =n.begin(); i!=n.end(); i++){
-		std::cout << (*i).first << "-" << (*i).second << " ";
-	}*/
-	//std::cout << std::endl;
+	}	
 
 	// serazeni pole	
 	for(unsigned int c = 0; c < n.size() - 1; c++){
@@ -75,27 +68,12 @@ void ControllerClovek::provedAkci(){
 
 void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
-	v = nejblizsiObjekty(3);
-
-	/*std::cout << "nejblizsi objekty: ";
-	std::vector<double>::iterator i;
-	for(i =v.begin(); i!=v.end(); i++){
-		std::cout << (*i) << ", ";
-	}
-	std::cout << std::endl;*/
+	v = nejblizsiObjekty(3);	
 
 	std::vector<double> vystupy;	
 	
 	vystupy = this->inteligence->update(v);
-
-	/*std::vector<double>::iterator j;
-		std::cout << "vystupy FRNN: ";
-		for(j=vystupy.begin(); j!=vystupy.end(); j++){
-			std::cout << (*j) << " ";
-		}
-		std::cout << std::endl;
-		std::cout << "skore: " << this->skore << "\n";*/
-	
+			
 	if (vystupy[0] > 0.5)
 		l->posunLeftD();
 	else if (vystupy[1] > 0.5)
