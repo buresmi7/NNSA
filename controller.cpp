@@ -1,3 +1,5 @@
+
+#include <cmath>
 #include "controller.h"
 #include "frnn.h"
 
