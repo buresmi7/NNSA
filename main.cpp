@@ -10,19 +10,8 @@
 
 using namespace std;
 
-int generator(){
-	int NP; double F; double CR; int Generations;
-	std::cout << "zadej velikost populace (60): ";
-	std::cin >> NP;
-	std::cout << "zadej mutacni konstantu (0.2): ";
-	std::cin >> F;
-	std::cout << "zadej prah krizeni (0.7): ";
-	std::cin >> CR;
-	std::cout << "zadej pocet generaci (?): ";
-	std::cin >> Generations;
-
+int generator(int NP, double F, double CR, int Generations){
 	DiferencialniEvoluce d(NP, F, CR, Generations, NULL);
-
 	std::cout << "genom:\n";
 	for(int i = 0; i < d.getBest()->getDelkaGenomu(); i++){
 		std::cout << d.getBest()->getVahy()[i] << "\n";
@@ -112,16 +101,26 @@ int main(int argc, char **argv){
 	opt->addUsage( "" );
 	opt->addUsage( "NNSA (Neural Network Space Arcade) - Testovani rekuretni neuronove site na jednoduche arkade" );
     opt->addUsage( "" );
-	opt->addUsage( "Usage: " );
+	opt->addUsage( "Pouziti: " );
     opt->addUsage( "" );
-    opt->addUsage( " -h  --help					Prints this help " );
-    opt->addUsage( " -g  --generator			Generator neuronove site " ); 
-	opt->addUsage( " -t  --tester input.txt		Testovani neuronove site " ); 
+    opt->addUsage( " -h   --help	Zobrazi tuto napovedu " );    
+	opt->addUsage( " -t   --tester input.txt	Testovani neuronove site " ); 
+	opt->addUsage( " -g   --generator	Generator neuronove site " ); 
+	opt->addUsage( " " );
+	opt->addUsage( "      --velikost-populace 60 " );
+	opt->addUsage( "      --mutacni-konstanta 0.3 " );
+	opt->addUsage( "      --prah-krizeni 0.9 " );
+	opt->addUsage( "      --pocet-generaci 100 " );
     opt->addUsage( "" );
 
 	opt->setFlag( "help", 'h');   /* a flag (takes no argument), supporting long and short form */
 	opt->setFlag( "generator", 'g');
 	opt->setOption( "tester", 't');
+
+	opt->setOption( "velikost-populace");
+	opt->setOption( "mutacni-konstanta");
+	opt->setOption( "prah-krizeni");
+	opt->setOption( "pocet-generaci");
 
 	opt->processCommandArgs(argc, argv);
 
@@ -131,17 +130,27 @@ int main(int argc, char **argv){
 		return 0;
 	}
 
-	if( opt->getFlag( "help" ) || opt->getFlag( 'h' ) ) 
+	if( opt->getFlag( "help" ) || opt->getFlag( 'h' ) )
 		opt->printUsage();
 	if( opt->getFlag( "generator" ) || opt->getFlag( 'g' ) ) {
+		// kontrola parametru testeru
+		if(opt->getValue("velikost-populace") == NULL || opt->getValue("mutacni-konstanta") == NULL || opt->getValue("prah-krizeni") == NULL || opt->getValue("pocet-generaci") == NULL){
+			cout << "Chybny parametr generatoru" << endl;
+			opt->printUsage(); 
+			delete opt;
+			return 0;
+		}
+		int NP = atoi(opt->getValue("velikost-populace"));
+		double F = atoi(opt->getValue("mutacni-konstanta"));
+		double CR = atoi(opt->getValue("prah-krizeni")); 
+		int Generations = atoi(opt->getValue("pocet-generaci"));
 		cout << "Generator neuronove site" << endl;
-		generator();
+		generator(NP, F, CR, Generations);
 	}
-	else if( opt->getValue( "tester" ) != NULL || opt->getValue( "t" ) != NULL ) {		
-		std::vector<double> vahy;
+	else if( opt->getValue( "tester" ) != NULL || opt->getValue( "t" ) != NULL ) {			
 		// nacteni vstupniho souboru
-		double s;		
-
+		std::vector<double> vahy;		
+		double s;
 		ifstream infile;
 		infile.open (opt->getValue( "tester" ));
 		while(!infile.eof()){
@@ -149,16 +158,11 @@ int main(int argc, char **argv){
 			vahy.push_back(s);
 			//cout << s << endl;
 		}
-
-		infile.close();
-				
+		infile.close();				
 		cout << "Testovani neuronove site" << endl;
 		tester(vahy);
-	}
-	
-	delete opt;
-
-		
+	}	
+	delete opt;	
 
     return 0;
 }
