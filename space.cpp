@@ -1,7 +1,7 @@
 #include "space.h"
 
-Space::Space(sf::RenderWindow *App){
-	this->App = App;
+Space::Space(sf::RenderWindow *App){	
+	this->App = App;	
 	// pokud je App == NULL => program byl spusten jako generator -> okeni system je vypnuty
 	if(App == NULL){		
 		vyska = 300;
@@ -10,18 +10,12 @@ Space::Space(sf::RenderWindow *App){
 	else{
 		vyska = App->GetHeight();
 		sirka = App->GetWidth();
+		//segfault!!!
+		Image.LoadFromFile("bg.png");		
+		pozadi.SetImage(Image);
+		pozadi.Resize((float)sirka, (float)vyska);
 	}
-	citac = 0;
-	//srand((unsigned int)time(0));
-
-	Image.LoadFromFile("bg.png");
-	pozadi.SetImage(Image);
-	pozadi.Resize((float)sirka, (float)vyska);
-
-	//inicializace lodi a controlleru
-	//pole.insert(new ControllerFRNN(new Lod(App, this, 100, 100), &pole));
-
-
+	citac = 0;		
 }
 sf::RenderWindow* Space::getApp(){
 	return this->App;

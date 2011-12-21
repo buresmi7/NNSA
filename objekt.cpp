@@ -92,15 +92,24 @@ void Objekt::vystrel(){
 }
 
 Lod::Lod(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
+	if(App == NULL){
+		vyska = 40;
+		sirka = 40;
+		return;
+	}
 	Image.LoadFromFile("raketa.tga");
-	sprite.SetImage(Image);
-	//sprite.SetColor(sf::Color(255,255,255,128));
+	sprite.SetImage(Image);	
 	vyska = Image.GetHeight();
-	sirka = Image.GetWidth();
+	sirka = Image.GetWidth();	
 	//std::cout << "vytvoreni objektu Lod" << std::endl;
 }	
 
 Skudce::Skudce(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
+	if(App == NULL){
+		vyska = 40;
+		sirka = 40;
+		return;
+	}
 	Image.LoadFromFile("raketa2.tga");
 	sprite.SetImage(Image);
 	//sprite.SetColor(sf::Color(255,255,255,128));
