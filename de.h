@@ -8,6 +8,8 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <string>
+#include <sstream>
 #include "controller.h"
 #include "frnn.h"
 #include "space.h"
@@ -34,6 +36,9 @@ class DiferencialniEvoluce{
 public:
 	// NP - velikost populace
 	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_kroku, sf::RenderWindow *App){
+		ofstream myfile;
+		myfile.open("data.txt");
+		
 		this->pocet_kroku = pocet_kroku;
 		this->App = App;			
 		//tvorba populace
@@ -106,7 +111,7 @@ public:
 				int o = ohodnoceni(n);
 
 				//vyber lepsiho jedince do nove populace
-				//std::cout << "vybiram mezi jedinci: " << o << " a " << populace[i].first << "\n";
+				//std::cout << "vybiram mezi jedinci: " << o << " a " << populace[i].first << "\n";		
 				if(o >= populace[i].first){
 					nova_populace.push_back(std::make_pair(o, n));
 					//std::cout << "ohodnoceni viteze: " << o << "\n";
@@ -114,16 +119,16 @@ public:
 						best = n;
 						nej = o;
 					}
+									
 				}
 				else{
-					nova_populace.push_back(populace[i]);
+					nova_populace.push_back(populace[i]);					
 					//std::cout << "ohodnoceni viteze: " << populace[i].first << "\n";
 					if(populace[i].first >= nej){
 						best = populace[i].second;
 						nej = populace[i].first;
 					}
-				}				
-								
+				}						
 				
 				//std::cout << "nejlepsi: " << nej << "\n";
 
@@ -136,26 +141,36 @@ public:
 			for(int j = 0; j < populace.size(); j++){
 				std::cout << nova_populace[j].first << " ";
 			}*/
+
+			
 			for(int j = 0; j < populace.size(); j++){
 				if(populace[j] == nova_populace[j])
 					continue;
 				else{
 					delete populace[j].second;
 					populace[j] = nova_populace[j];
-				}
-			}
+				}				
+			}			
+
+			ostringstream ss;
+			ss << "populace " << k+1 << "\t";
 			int p = 0;
 			//std::cout << "\nvysledna populace:\n"; 
 			for(int j = 0; j < populace.size(); j++){
 				//std::cout << populace[j].first << " ";
 				p += populace[j].first;
-			}
+				//zapis do souboru
+				ss << populace[j].first << "\t";	
+			}								
+			myfile << ss.str() << endl;
+
 			std::cout << "nejlepsi jedinec: " << nej;
 			std::cout << "\nprumer vysledne populace: " << p/NP;
 
 			std::cout << "\n";
 			nova_populace.clear();
 		}
+		myfile.close();	
 	}
 	FRNeuralNetwork* getBest(){
 		return best;

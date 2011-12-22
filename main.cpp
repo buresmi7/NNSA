@@ -37,9 +37,7 @@ int tester(std::vector<double> vahy){
 
 	// nacteni obrazku - inicializace v objektech
 	Lod *a = new Lod();
-	std::cout << "joj" << std::endl;
 	a->Init("raketa.tga");
-	std::cout << "joj" << std::endl;
 	Skudce *b = new Skudce();
 	b->Init("raketa2.tga");
 
