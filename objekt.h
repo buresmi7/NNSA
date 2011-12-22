@@ -15,13 +15,12 @@ protected:
 	int pozice_y;
 	int sirka;
 	int vyska;
-	sf::Sprite sprite;
-	sf::Image Image;
+	sf::Sprite sprite;	
 	sf::RenderWindow *app;//odkaz na okno do ktereho ma vykreslovat
 	Space *space;
 	int pocitadlo;
 	Objekt* vlastnik;
-public:
+public:	
 	Objekt(sf::RenderWindow *App, Space *s, int pozice_x = 0, int pozice_y = 0, Objekt *vlastnik = NULL);
 	Objekt(const Objekt &o);
 	void nastavPozici(int x, int y);
@@ -49,21 +48,27 @@ public:
 };
 
 class Lod : public Objekt{
+	static sf::Image Image;
 public:
-	Lod(sf::RenderWindow *App, Space *s, int pozice_x, int pozice_y, Objekt *vlastnik = NULL);	
+	Lod(sf::RenderWindow *App = NULL, Space *s = NULL, int pozice_x = 0, int pozice_y = 0, Objekt *vlastnik = NULL);	
 	char getName(){return 'n';};
+	static bool Init(const std::string& ImageFile){return Image.LoadFromFile(ImageFile);};
 };
 
 class Skudce : public Objekt{
+	static sf::Image Image;
 public:
-	Skudce(sf::RenderWindow *App, Space *s, int pozice_x, int pozice_y, Objekt *vlastnik = NULL);
+	Skudce(sf::RenderWindow *App = NULL, Space *s = NULL, int pozice_x = 0, int pozice_y = 0, Objekt *vlastnik = NULL);
 	char getName(){return 'n';};
+	static bool Init(const std::string& ImageFile){return Image.LoadFromFile(ImageFile);};
 };
 
 class Strela : public Objekt{
+	static sf::Image Image;
 public:
-	Strela(sf::RenderWindow *App, Space *s, int pozice_x, int pozice_y, Objekt *vlastnik);
-	char getName(){return 's';};	
+	Strela(sf::RenderWindow *App = NULL, Space *s = NULL, int pozice_x = 0, int pozice_y = 0, Objekt *vlastnik = NULL);
+	char getName(){return 's';};
+	static bool Init(const std::string& ImageFile){return Image.LoadFromFile(ImageFile);};
 };
 #endif
 

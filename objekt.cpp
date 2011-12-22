@@ -1,6 +1,11 @@
 #include "objekt.h"
 #include "space.h"
 
+// definovani clenske promenne kvuli static
+sf::Image Lod::Image;
+sf::Image Skudce::Image;
+sf::Image Strela::Image;
+
 Objekt::Objekt(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik){
 	this->pozice_x = pozice_x;
 	this->pozice_y = pozice_y;
@@ -15,8 +20,7 @@ Objekt::Objekt(const Objekt &o){
 	pozice_x = o.pozice_x;
 	pozice_y = o.pozice_y;
 	sirka = o.sirka;
-	vyska = o.vyska;
-	Image = o.Image;
+	vyska = o.vyska;	
 	sprite = o.sprite;
 	app = o.app;
 	space = o.space;
@@ -92,12 +96,6 @@ void Objekt::vystrel(){
 }
 
 Lod::Lod(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
-	if(App == NULL){
-		vyska = 40;
-		sirka = 40;
-		return;
-	}
-	Image.LoadFromFile("raketa.tga");
 	sprite.SetImage(Image);	
 	vyska = Image.GetHeight();
 	sirka = Image.GetWidth();	
@@ -105,23 +103,16 @@ Lod::Lod(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vl
 }	
 
 Skudce::Skudce(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
-	if(App == NULL){
-		vyska = 40;
-		sirka = 40;
-		return;
-	}
-	Image.LoadFromFile("raketa2.tga");
 	sprite.SetImage(Image);
-	//sprite.SetColor(sf::Color(255,255,255,128));
 	vyska = Image.GetHeight();
 	sirka = Image.GetWidth();
 	//std::cout << "vytvoreni objektu Skudce" << std::endl;
 }
 
 Strela::Strela(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y, vlastnik){
-	Image.LoadFromFile("strela.tga");
 	sprite.SetImage(Image);
-
+	vyska = Image.GetHeight();
+	sirka = Image.GetWidth();
 	//std::cout << "vytvoreni objektu Strela" << std::endl;
 }
 
