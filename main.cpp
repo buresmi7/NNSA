@@ -35,7 +35,13 @@ int tester(std::vector<double> vahy){
 	bool pauza = false;
 	int kola = 0;
 
-	srand((unsigned int)time(0));
+	// nacteni obrazku - inicializace v objektech
+	Lod *a = new Lod();
+	std::cout << "joj" << std::endl;
+	a->Init("raketa.tga");
+	std::cout << "joj" << std::endl;
+	Skudce *b = new Skudce();
+	b->Init("raketa2.tga");
 
     // Create the main rendering window
     sf::RenderWindow App(sf::VideoMode(400, 300, 32), "SFML Graphics");
@@ -105,12 +111,7 @@ int main(int argc, char **argv){
 	clock_t t1, t2;
 	t1 = clock();
 	// nekonstantni nastaveni generatoru nahodnych cisel
-	srand(time(0));
-	// nacteni obrazku - inicializace v objektech
-	Lod *a = new Lod();
-	a->Init("raketa.tga");
-	Skudce *b = new Skudce();
-	b->Init("raketa2.tga");
+	srand(time(0));	
 
 	// parsovani parametru
 	AnyOption *opt = new AnyOption();

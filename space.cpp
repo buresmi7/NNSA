@@ -5,12 +5,12 @@ Space::Space(sf::RenderWindow *App){
 	// pokud je App == NULL => program byl spusten jako generator -> okeni system je vypnuty
 	if(App == NULL){		
 		vyska = 300;
-		sirka = 400;
+		sirka = 400;		
 	}
 	else{
 		vyska = App->GetHeight();
 		sirka = App->GetWidth();
-		//segfault!!!
+		//segfault!!!		
 		Image.LoadFromFile("bg.png");		
 		pozadi.SetImage(Image);
 		pozadi.Resize((float)sirka, (float)vyska);
