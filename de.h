@@ -82,29 +82,14 @@ public:
 				}
 
 				//vypocet diferencniho vahoveho vektoru
-				std::vector<double> dif_vah_vektor;
-				for(int j = 0; j < prvni->getVahy().size(); j++){
-					dif_vah_vektor.push_back(prvni->getVahy()[j] - druhy->getVahy()[j]);
-				}
-				//std::transform(prvni->getVahy().begin(), prvni->getVahy().end(), druhy->getVahy().begin(), dif_vah_vektor.begin(), std::minus<double>());
-			
-				for(int j = 0; j < dif_vah_vektor.size(); j++){
-					dif_vah_vektor[j] *= F;
-				}
-
-				//vypocet sumoveho vektoru
-				std::vector<double> sum_vektor(dif_vah_vektor.size());
-				std::transform(dif_vah_vektor.begin(), dif_vah_vektor.end(), treti->getVahy().begin(), sum_vektor.begin(), std::plus<double>());
-
-				//vypocet zkusebniho vektoru
 				std::vector<double> zkusebni_vektor;
-				for(int j = 0; j < sum_vektor.size(); j++){
+				for(int j = 0; j < prvni->getVahy().size(); j++){
 					int nahodne = p->RandomUniform(0, 1);
 					if(nahodne < CR)
-						zkusebni_vektor.push_back(sum_vektor[j]);
+						zkusebni_vektor.push_back((prvni->getVahy()[j] - druhy->getVahy()[j])*F + treti->getVahy()[j]);
 					else
-						zkusebni_vektor.push_back(populace[i].second->getVahy()[j]);
-				}
+						zkusebni_vektor.push_back(populace[i].second->getVahy()[j]);										
+				}				
 
 				FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);
 				n->nastavVahy(zkusebni_vektor);
