@@ -52,6 +52,31 @@ std::vector<double> Controller::nejblizsiObjekty(int pocetObjektu){
 	return vysledek;
 }
 
+std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){	
+	std::vector<double> vysledek;
+	if(pole == NULL) return vysledek;
+	
+	std::set<Controller*>::iterator j;
+	for(j=pole->begin(); j!=pole->end(); j++){
+		// naplneni pole vzdalenostmi od ostatnich objektu
+		vysledek.push_back(std::sqrt((float)(std::pow((double)this->getObjekt()->getPoziceX() - (*j)->getObjekt()->getPoziceX(),2) + std::pow((double)this->getObjekt()->getPoziceY() - (*j)->getObjekt()->getPoziceY(),2))));
+	}	
+	sort(vysledek.begin(),vysledek.end());
+	vysledek.erase (vysledek.begin());// vymazani prvni vzdalenosti - je nula	
+	// doplneni pole na pozadovanou velikost a naplni je nulami
+	while(true){		
+		if(vysledek.size() > pocetObjektu)
+			break;
+		vysledek.push_back(0);
+	}
+	vysledek.erase (vysledek.begin()+pocetObjektu, vysledek.end());// vymazani prebyvajicich vzdalenosti
+	/*std::cout << "serazene pole: ";
+	for(int i = 0; i < vysledek.size(); i++){
+		std::cout << vysledek[i] << " ";
+	}
+	std::cout << "\n";*/
+	return vysledek;
+}
 void ControllerClovek::provedAkci(){
 	const sf::Input& Input = l->getApp()->GetInput();
 	if (Input.IsKeyDown(sf::Key::Left))
@@ -68,7 +93,7 @@ void ControllerClovek::provedAkci(){
 
 void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
-	v = nejblizsiObjekty(3);	
+	v = nejblizsiVzdalenostiObjektu(4);	
 
 	std::vector<double> vystupy;	
 	

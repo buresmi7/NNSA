@@ -14,6 +14,7 @@ protected:
 
 	static bool razeni(std::pair<int , int> i,std::pair<int, int> j);
 	std::vector<double> nejblizsiObjekty(int pocetObjektu);	
+	std::vector<double> nejblizsiVzdalenostiObjektu(int pocetObjektu);
 public:
 	Controller(Objekt *l, std::set<Controller*> *objekty);
 	~Controller(){delete l;};
