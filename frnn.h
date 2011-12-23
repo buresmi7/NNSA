@@ -41,7 +41,7 @@ struct FRNeuralNetwork{
 	double Sum(int offset, std::vector<double> vystupy, std::vector<double> vstupy){
 		double sum = 0;
 
-		for(int i = 0; i < pocet_vystupu; i++){
+		for(int i = 0; i < pocet_neuronu; i++){
 			sum += vahy[i + offset * delka_jednoho_neuronu] * vystupy[i];
 		}
 
@@ -117,8 +117,13 @@ public:
 		return(result);
 	}
 
-	FRNeuralNetwork(){
-		pocet_vystupu = pocet_neuronu = 4;
+	FRNeuralNetwork(int pocet_neuronu){
+		pocet_vystupu = 4;
+		if(pocet_neuronu < pocet_vystupu){
+			std::cout << "chyba!!! pocet neuronu je mensi nez pocet vystupu" << std::endl;
+			exit(1);
+		}
+		this->pocet_neuronu = pocet_neuronu;
 		pocet_vstupu = 6;		
 		delka_jednoho_neuronu = pocet_vystupu + pocet_vstupu + 1;
 		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
@@ -143,6 +148,7 @@ public:
 		return vahy;
 	}
 	std::vector<double> update(std::vector<double> vstupy){
+		// vystupy je mysleno vahy mezi neurony
 		std::vector<double> vystupy(pocet_neuronu);
 		std::vector<double> pre_vystupy(pocet_neuronu, 0);
 		// kontrola delky vstupu

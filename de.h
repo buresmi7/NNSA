@@ -35,7 +35,7 @@ class DiferencialniEvoluce{
 	}
 public:
 	// NP - velikost populace
-	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_kroku, sf::RenderWindow *App){
+	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_kroku, int pocet_neuronu, sf::RenderWindow *App){
 		ofstream myfile;
 		myfile.open("data.txt");
 		
@@ -44,7 +44,7 @@ public:
 		//tvorba populace
 		std::cout << "tvorba populace\n";
 		for(int i = 0; i < NP; i++){			
-			FRNeuralNetwork *n = new FRNeuralNetwork();			
+			FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);			
 			int o = ohodnoceni(n);			
 			populace.push_back(std::make_pair(o, n));
 		}
@@ -55,7 +55,7 @@ public:
 			std::cout << "nova populace " << k+1 << "\n";
 			for(int i = 0; i < NP; i++){
 				//zvoleni 3 nahodnych jedincu
-				FRNeuralNetwork *p = new FRNeuralNetwork();
+				FRNeuralNetwork *p = new FRNeuralNetwork(pocet_neuronu);
 				FRNeuralNetwork *prvni;
 				FRNeuralNetwork *druhy;
 				FRNeuralNetwork *treti;
@@ -106,7 +106,7 @@ public:
 						zkusebni_vektor.push_back(populace[i].second->getVahy()[j]);
 				}
 
-				FRNeuralNetwork *n = new FRNeuralNetwork();
+				FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);
 				n->nastavVahy(zkusebni_vektor);
 				int o = ohodnoceni(n);
 
@@ -128,20 +128,9 @@ public:
 						best = populace[i].second;
 						nej = populace[i].first;
 					}
-				}						
-				
+				}				
 				//std::cout << "nejlepsi: " << nej << "\n";
-
-			}
-			/*std::cout << "\nstara populace:\n"; 
-			for(int j = 0; j < populace.size(); j++){
-				std::cout << populace[j].first << " ";
-			}
-			std::cout << "\nnova populace:\n"; 
-			for(int j = 0; j < populace.size(); j++){
-				std::cout << nova_populace[j].first << " ";
-			}*/
-
+			}			
 			
 			for(int j = 0; j < populace.size(); j++){
 				if(populace[j] == nova_populace[j])

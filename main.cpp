@@ -11,13 +11,14 @@
 
 using namespace std;
 
-int generator(int NP, double F, double CR, int Generations, int pocet, char* soubor){
+int generator(int NP, double F, double CR, int Generations, int pocet, int pocet_neuronu, char* soubor){
 	cout << "Parametry diferencialni evoluce" << endl;
 	cout << "NP = " << NP << endl;
 	cout << "F = " << F  << endl;
 	cout << "CR = " << CR << endl;
 	cout << "Generations = " << Generations << endl;
-	DiferencialniEvoluce d(NP, F, CR, Generations, pocet, NULL);
+	cout << "neurons = " << pocet_neuronu << endl;
+	DiferencialniEvoluce d(NP, F, CR, Generations, pocet, pocet_neuronu, NULL);
 	//zapis do souboru
 	ofstream myfile;
 	myfile.open(soubor);	
@@ -30,7 +31,7 @@ int generator(int NP, double F, double CR, int Generations, int pocet, char* sou
 	return 0;
 }
 
-int tester(std::vector<double> vahy){
+int tester(std::vector<double> vahy, int pocet_neuronu){
 	bool zacni = false;
 	bool pauza = false;
 	int kola = 0;
@@ -60,7 +61,7 @@ int tester(std::vector<double> vahy){
 
 	Space space(&App);		
 	
-	FRNeuralNetwork f;
+	FRNeuralNetwork f(pocet_neuronu);
 	f.nastavVahy(vahy);
 
 	ControllerFRNN *c = new ControllerFRNN(new Lod(&App, &space, 200, 150), &f);
@@ -130,6 +131,7 @@ int main(int argc, char **argv){
 	opt->addUsage( "      --CR 0.9	Prah krizeni " );
 	opt->addUsage( "      --generations 100	Pocet kol slechteni populace " );
 	opt->addUsage( "      --pocet 5000	Pocet kol ohodnocovaci funkce " );
+	opt->addUsage( "      --neurons 4	Pocet neuronu v neuronove siti " );
     opt->addUsage( "" );
 
 	opt->setFlag( "help", 'h');   /* a flag (takes no argument), supporting long and short form */
@@ -141,6 +143,7 @@ int main(int argc, char **argv){
 	opt->setOption("CR");
 	opt->setOption("generations");
 	opt->setOption("pocet");
+	opt->setOption("neurons");
 
 	opt->processCommandArgs(argc, argv);
 
@@ -154,7 +157,7 @@ int main(int argc, char **argv){
 		opt->printUsage();
 	if(opt->getValue('g') != NULL ) {
 		// kontrola parametru testeru
-		if(opt->getValue("NP") == NULL || opt->getValue("F") == NULL || opt->getValue("CR") == NULL || opt->getValue("generations") == NULL || opt->getValue("pocet") == NULL){
+		if(opt->getValue("NP") == NULL || opt->getValue("F") == NULL || opt->getValue("CR") == NULL || opt->getValue("generations") == NULL || opt->getValue("pocet") == NULL || opt->getValue("neurons") == NULL){
 			cout << "Chybny parametr generatoru" << endl;
 			opt->printUsage(); 
 			delete opt;
@@ -165,10 +168,18 @@ int main(int argc, char **argv){
 		double CR = atof(opt->getValue("CR")); 
 		int Generations = atoi(opt->getValue("generations"));
 		int pocet = atoi(opt->getValue("pocet"));
+		int pocet_neuronu = atoi(opt->getValue("neurons"));
 		cout << "Generator neuronove site" << endl;
-		generator(NP, F, CR, Generations, pocet, opt->getValue('g'));
+		generator(NP, F, CR, Generations, pocet, pocet_neuronu, opt->getValue('g'));
 	}
-	else if(opt->getValue('t') != NULL ) {			
+	else if(opt->getValue('t') != NULL ) {	
+		if(opt->getValue("neurons") == NULL){
+			cout << "Chybny parametr generatoru" << endl;
+			opt->printUsage(); 
+			delete opt;
+			return 0;
+		}
+		int pocet_neuronu = atoi(opt->getValue("neurons"));
 		// nacteni vstupniho souboru
 		std::vector<double> vahy;		
 		double s;
@@ -181,7 +192,7 @@ int main(int argc, char **argv){
 		}
 		infile.close();				
 		cout << "Testovani neuronove site" << endl;
-		tester(vahy);
+		tester(vahy, pocet_neuronu);
 	}	
 	delete opt;	
 
