@@ -25,12 +25,14 @@ class DiferencialniEvoluce{
 
 	int ohodnoceni(FRNeuralNetwork *f){			
 		Space s(App);	
-		ControllerFRNN *c = new ControllerFRNN(new Lod(App, &s, 200, 150), f);			
+		Lod *l = new Lod(App, &s, 200, 150);
+		l->nastavPocitaniKolizi();
+		ControllerFRNN *c = new ControllerFRNN(l, f);			
 		s.addController(c);
 		for(int j = 0; j < pocet_kroku; j++){
 			s.ProvedKolo();				
 		}
-		
+		delete l;
 		return c->getSkore();
 	}
 public:

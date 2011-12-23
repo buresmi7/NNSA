@@ -65,15 +65,16 @@ void Space::ProvedKolo(){
 	std::set<Controller*>::iterator i;
 	std::set<Controller*>::iterator j;
 	std::set<Controller*> vymaz;
-	for(i = pole.begin(); i != pole.end(); ++i){
+	for(i = pole.begin(); i != pole.end(); ++i){		
 		// vymazani objektu mimo mapu
 		if((*i)->getObjekt()->getPoziceY() < 0 || (*i)->getObjekt()->getPoziceY() > vyska){
 			vymaz.insert((*i));
 			//std::cout << "objekt vymazan " << std::endl;
-		}
+		}		
 		for(j = pole.begin(); j != pole.end(); ++j){
 			if((*i) == (*j))break;
-			//if(Collision::CircleTest((*i)->getObjekt()->getSprite(), (*j)->getObjekt()->getSprite())){
+			if((*i)->getObjekt()->pocitejKolize() == false && (*j)->getObjekt()->pocitejKolize() == false)
+			break;
 			if(CircleTest((*i)->getObjekt(), (*j)->getObjekt())){
 				(*i)->prictiSkore(-1);
 				(*j)->prictiSkore(-1);				

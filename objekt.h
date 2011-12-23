@@ -15,6 +15,7 @@ protected:
 	int pozice_y;
 	int sirka;
 	int vyska;
+	bool pocitej_kolize;
 	sf::Sprite sprite;	
 	sf::RenderWindow *app;//odkaz na okno do ktereho ma vykreslovat
 	Space *space;
@@ -23,6 +24,8 @@ protected:
 public:	
 	Objekt(sf::RenderWindow *App, Space *s, int pozice_x = 0, int pozice_y = 0, Objekt *vlastnik = NULL);
 	Objekt(const Objekt &o);
+	void nastavPocitaniKolizi(){pocitej_kolize = true;};
+	bool pocitejKolize(){return pocitej_kolize;};
 	void nastavPozici(int x, int y);
 	void Draw();
 	sf::RenderWindow * getApp();

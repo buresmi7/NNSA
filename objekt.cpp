@@ -15,6 +15,7 @@ Objekt::Objekt(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Obje
 	space = s;
 	pocitadlo = 0;
 	this->vlastnik = vlastnik;
+	pocitej_kolize = false;
 }
 Objekt::Objekt(const Objekt &o){
 	pozice_x = o.pozice_x;
@@ -24,6 +25,7 @@ Objekt::Objekt(const Objekt &o){
 	sprite = o.sprite;
 	app = o.app;
 	space = o.space;
+	pocitej_kolize = o.pocitej_kolize;
 }
 void Objekt::nastavPozici(int x, int y){
 	pozice_x = x;
