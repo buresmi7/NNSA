@@ -25,7 +25,7 @@ class DiferencialniEvoluce{
 
 	int ohodnoceni(FRNeuralNetwork *f){			
 		Space s(App);	
-		Lod *l = new Lod(App, &s, 200, 150);
+		Lod *l = new Lod(App, &s, 180, 150);
 		l->nastavPocitaniKolizi();
 		ControllerFRNN *c = new ControllerFRNN(l, f);			
 		s.addController(c);

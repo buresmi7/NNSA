@@ -64,7 +64,7 @@ int tester(std::vector<double> vahy, int pocet_neuronu){
 	FRNeuralNetwork f(pocet_neuronu);
 	f.nastavVahy(vahy);
 
-	ControllerFRNN *c = new ControllerFRNN(new Lod(&App, &space, 200, 150), &f);
+	ControllerFRNN *c = new ControllerFRNN(new Lod(&App, &space, 180, 150), &f);
 	//ControllerFRNN *c = new ControllerFRNN(new Lod(&App, &space, 200, 150), new FRNeuralNetwork());
 	//ControllerClovek *c = new ControllerClovek(new Lod(&App, &space, 200, 150));
 	space.addController(c);
