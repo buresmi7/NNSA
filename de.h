@@ -10,9 +10,12 @@
 #include <algorithm>
 #include <string>
 #include <sstream>
+
 #include "controller.h"
 #include "frnn.h"
 #include "space.h"
+
+int genrand(int min, int max){return min+(rand()%(++max-min));}
 
 class DiferencialniEvoluce{
 	//vektor populace
@@ -50,32 +53,32 @@ public:
 			int o = ohodnoceni(n);			
 			populace.push_back(std::make_pair(o, n));
 		}
-
+		srand(time(0));
 		for(int k = 0; k < Generations; k++){
 			nej = -5000;
 			//krizeni
 			std::cout << "nova populace " << k+1 << "\n";
 			for(int i = 0; i < NP; i++){
 				//zvoleni 3 nahodnych jedincu
-				FRNeuralNetwork *p = new FRNeuralNetwork(pocet_neuronu);
+				//FRNeuralNetwork *p = new FRNeuralNetwork(pocet_neuronu);
 				FRNeuralNetwork *prvni;
 				FRNeuralNetwork *druhy;
 				FRNeuralNetwork *treti;
 				while(true){
-					int nahodne = p->RandomUniform(0, NP-1);
+					int nahodne = genrand(0, NP-1);
 					if(nahodne == i)continue;
 					prvni = populace[nahodne].second;
 					break;
 				}
 				while(true){
-					int nahodne = p->RandomUniform(0, NP-1);
+					int nahodne = genrand(0, NP-1);
 					if(nahodne == i)continue;
 					druhy = populace[nahodne].second;
 					if(prvni == druhy)continue;
 					break;
 				}
 				while(true){
-					int nahodne = p->RandomUniform(0, NP-1);
+					int nahodne = genrand(0, NP-1);
 					if(nahodne == i)continue;
 					treti = populace[nahodne].second;
 					if(treti == prvni)continue;
@@ -86,7 +89,7 @@ public:
 				//vypocet diferencniho vahoveho vektoru
 				std::vector<double> zkusebni_vektor;
 				for(int j = 0; j < prvni->getVahy().size(); j++){
-					int nahodne = p->RandomUniform(0, 1);
+					int nahodne = genrand(0, 1);
 					if(nahodne < CR)
 						zkusebni_vektor.push_back((prvni->getVahy()[j] - druhy->getVahy()[j])*F + treti->getVahy()[j]);
 					else
@@ -95,6 +98,7 @@ public:
 
 				FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);
 				n->nastavVahy(zkusebni_vektor);
+				srand(20);
 				int o = ohodnoceni(n);
 
 				//vyber lepsiho jedince do nove populace

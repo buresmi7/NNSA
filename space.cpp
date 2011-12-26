@@ -36,16 +36,15 @@ void Space::ProvedKolo(){
 	// vygenerovani objektu a jejich controlleru	
 	if(citac%60 == 0)
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
-	/*if(citac%250 == 0){
+	if((citac+30)%60 == 0)
+		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
+	//if((citac+30)%100 == 0)
+		//pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
+	if(citac%200 == 0){
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, 0, 0), &pole));
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, sirka-40, 0), &pole));
-	}*/
-	if(citac%80 == 0)
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, citac, 0), &pole));
-	if(citac+40%80 == 0)
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, citac, 0), &pole));
-	if(citac%200 == 0)
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, sirka-40, 0), &pole));
+		pole.insert(new ControllerShoraDolu(new Skudce(App, this, 180, 0), &pole));
+	}	
 
 
 	std::set<Controller*>::iterator ii;

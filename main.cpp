@@ -110,7 +110,7 @@ int main(int argc, char **argv){
 	clock_t t1, t2;
 	t1 = clock();
 	// nekonstantni nastaveni generatoru nahodnych cisel
-	srand(time(0));	
+	srand(20);	
 
 	// parsovani parametru
 	AnyOption *opt = new AnyOption();
