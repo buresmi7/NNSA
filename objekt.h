@@ -11,8 +11,8 @@ class Space;
 
 class Objekt{
 protected:
-	int pozice_x;
-	int pozice_y;
+	double pozice_x;
+	double pozice_y;
 	int sirka;
 	int vyska;
 	bool pocitej_kolize;
@@ -30,8 +30,8 @@ public:
 	void Draw();
 	sf::RenderWindow * getApp();
 	sf::Sprite getSprite();
-	int getPoziceX();
-	int getPoziceY();
+	double getPoziceX();
+	double getPoziceY();
 	void posunLeft();
 	void posunRight();
 	void posunUp();
@@ -43,6 +43,8 @@ public:
 	void posunDownD();
 
 	void posun(int x, int y);
+	void posunX(double x);
+	void posunY(double y);
 	void otoc();
 	void vystrel();
 	virtual char getName() = 0;
