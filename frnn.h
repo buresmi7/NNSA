@@ -32,7 +32,8 @@ struct FRNeuralNetwork{
    std::vector<double> vahy;
 
 	double nahodneCislo(double fMin, double fMax){
-		double f = (double)rand() / RAND_MAX;
+		double f;
+		f = (double)rand() / RAND_MAX;		
 		return fMin + f * (fMax - fMin);
 	}	
 	double Sigmoid(double x){
@@ -40,15 +41,14 @@ struct FRNeuralNetwork{
 	}
 	double Sum(int offset, std::vector<double> vystupy, std::vector<double> vstupy){
 		double sum = 0;
-
 		for(int i = 0; i < pocet_neuronu; i++){
 			sum += vahy[i + offset * delka_jednoho_neuronu] * vystupy[i];
 		}
 
-		sum += vahy[pocet_vystupu + offset * delka_jednoho_neuronu] * 1;
+		sum += vahy[pocet_neuronu + offset * delka_jednoho_neuronu] * 1;
 
 		int j = 0;
-		for(int i = pocet_vystupu + 1; i < pocet_vystupu + pocet_vystupu + 1; i++){
+		for(int i = pocet_neuronu + 1; i < delka_jednoho_neuronu; i++){
 			sum += vahy[i + offset * delka_jednoho_neuronu] * vstupy[j];
 			j++;
 		}
@@ -118,25 +118,19 @@ public:
 	}
 
 	FRNeuralNetwork(int pocet_neuronu){
-		pocet_vystupu = 4;
+		pocet_vystupu = 2;
 		if(pocet_neuronu < pocet_vystupu){
 			std::cout << "chyba!!! pocet neuronu je mensi nez pocet vystupu" << std::endl;
 			exit(1);
 		}
 		this->pocet_neuronu = pocet_neuronu;
-		pocet_vstupu = 4;		
-		delka_jednoho_neuronu = pocet_vystupu + pocet_vstupu + 1;
+		pocet_vstupu = 2;		
+		delka_jednoho_neuronu = pocet_neuronu + 1 + pocet_vstupu;
 		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
 		//nahodne naplneni vsech genomu;		
 		for(int i = 0; i < delka_genomu; i++){
-			vahy.push_back(RandomUniform(-1, 1));
+			vahy.push_back(nahodneCislo(-1, 1));
 		}
-		
-		/*std::cout << "genom: ";
-		for(int i = 0; i < delka_genomu; i++){
-			std::cout << vahy[i] << " ";
-		}
-		std::cout << "\n";*/
 	}
 	int getDelkaGenomu(){
 		return delka_genomu;
@@ -152,9 +146,10 @@ public:
 		std::vector<double> vystupy(pocet_neuronu);
 		std::vector<double> pre_vystupy(pocet_neuronu, 0);
 		// kontrola delky vstupu
-		if(vstupy.size() != pocet_vstupu)
-			return vystupy;		
-		
+		if(vstupy.size() != pocet_vstupu){
+			std::cout << "chyba!!! pocet vstupu nesouhlasi" << std::endl;
+			exit(1);
+		}
 		// vypocetni cast pro kazdy neuron - cas t
 		for(int i = 0; i < pocet_neuronu; i++){
 			double s = Sum(i, pre_vystupy, vstupy);
