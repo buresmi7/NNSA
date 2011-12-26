@@ -26,7 +26,8 @@ class DiferencialniEvoluce{
 	int nej;
 	int pocet_kroku;
 
-	int ohodnoceni(FRNeuralNetwork *f){			
+	int ohodnoceni(FRNeuralNetwork *f){		
+		srand(1);
 		Space s(App);	
 		Lod *l = new Lod(App, &s, 180, 150);
 		l->nastavPocitaniKolizi();
@@ -36,6 +37,7 @@ class DiferencialniEvoluce{
 			s.ProvedKolo();				
 		}
 		delete l;
+		srand((unsigned int)time(0));
 		return c->getSkore();
 	}
 public:
@@ -49,16 +51,15 @@ public:
 		//tvorba populace
 		std::cout << "tvorba populace\n";
 		for(int i = 0; i < NP; i++){			
-			FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);			
-			int o = ohodnoceni(n);			
+			FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);	
+			int o = ohodnoceni(n);				
 			populace.push_back(std::make_pair(o, n));
-		}
-		srand(time(0));
+		}		
 		for(int k = 0; k < Generations; k++){
 			nej = -5000;
 			//krizeni
 			std::cout << "nova populace " << k+1 << "\n";
-			for(int i = 0; i < NP; i++){
+			for(int i = 0; i < NP; i++){				
 				//zvoleni 3 nahodnych jedincu
 				//FRNeuralNetwork *p = new FRNeuralNetwork(pocet_neuronu);
 				FRNeuralNetwork *prvni;
@@ -88,7 +89,7 @@ public:
 
 				//vypocet diferencniho vahoveho vektoru
 				std::vector<double> zkusebni_vektor;
-				for(int j = 0; j < prvni->getVahy().size(); j++){
+				for(unsigned int j = 0; j < prvni->getVahy().size(); j++){
 					int nahodne = genrand(0, 1);
 					if(nahodne < CR)
 						zkusebni_vektor.push_back((prvni->getVahy()[j] - druhy->getVahy()[j])*F + treti->getVahy()[j]);
@@ -98,7 +99,6 @@ public:
 
 				FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);
 				n->nastavVahy(zkusebni_vektor);
-				srand(20);
 				int o = ohodnoceni(n);
 
 				//vyber lepsiho jedince do nove populace
@@ -123,7 +123,7 @@ public:
 				//std::cout << "nejlepsi: " << nej << "\n";
 			}			
 			
-			for(int j = 0; j < populace.size(); j++){
+			for(unsigned int j = 0; j < populace.size(); j++){
 				if(populace[j] == nova_populace[j])
 					continue;
 				else{
@@ -136,7 +136,7 @@ public:
 			ss << "populace " << k+1 << "\t";
 			int p = 0;
 			//std::cout << "\nvysledna populace:\n"; 
-			for(int j = 0; j < populace.size(); j++){
+			for(unsigned int j = 0; j < populace.size(); j++){
 				//std::cout << populace[j].first << " ";
 				p += populace[j].first;
 				//zapis do souboru

@@ -23,6 +23,7 @@ class Space{
 	sf::Image Image;
 	sf::Font MyFont;
 	int citac;
+	int citac2;
 	int genrand(int min, int max){return min+(rand()%(++max-min));};
 	bool CircleTest(Objekt *a, Objekt *b);
 public:

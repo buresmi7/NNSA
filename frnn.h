@@ -37,7 +37,7 @@ struct FRNeuralNetwork{
 		return fMin + f * (fMax - fMin);
 	}	
 	double Sigmoid(double x){
-		return 1 / (1 + exp(-x));
+		return 1 / (1 + exp(-x*100));
 	}
 	double Sum(int offset, std::vector<double> vystupy, std::vector<double> vstupy){
 		double sum = 0;
@@ -56,67 +56,6 @@ struct FRNeuralNetwork{
 	}
 
 public:
-	double RandomUniform(double minValue,double maxValue){
-		long j;
-		long k;
-		static long idum;
-		static long idum2=123456789;
-		static long iy=0;
-		static long iv[NTAB];
-		double result;
-
-		if (iy == 0)
-			idum = SEED;
-
-		if (idum <= 0)
-		{
-			if (-idum < 1)
-				idum = 1;
-			else
-				idum = -idum;
-
-			idum2 = idum;
-
-			for (j=NTAB+7; j>=0; j--)
-			{
-				k = idum / IQ1;
-				idum = IA1 * (idum - k*IQ1) - k*IR1;
-				if (idum < 0) idum += IM1;
-				if (j < NTAB) iv[j] = idum;
-			}
-
-			iy = iv[0];
-		}
-
-		k = idum / IQ1;
-		idum = IA1 * (idum - k*IQ1) - k*IR1;
-
-		if (idum < 0)
-			idum += IM1;
-
-		k = idum2 / IQ2;
-		idum2 = IA2 * (idum2 - k*IQ2) - k*IR2;
-
-		if (idum2 < 0)
-			idum2 += IM2;
-
-		j = iy / NDIV;
-		iy = iv[j] - idum2;
-		iv[j] = idum;
-
-		if (iy < 1)
-			iy += IMM1;
-
-		result = AM * iy;
-
-		if (result > RNMX)
-			result = RNMX;
-
-		result = minValue + result * (maxValue - minValue);
-		//std::cout<<"nahodne cislo: " << result << "\n";
-		return(result);
-	}
-
 	FRNeuralNetwork(int pocet_neuronu){
 		pocet_vystupu = 2;
 		if(pocet_neuronu < pocet_vystupu){
@@ -124,7 +63,7 @@ public:
 			exit(1);
 		}
 		this->pocet_neuronu = pocet_neuronu;
-		pocet_vstupu = 2;		
+		pocet_vstupu = 4;		
 		delka_jednoho_neuronu = pocet_neuronu + 1 + pocet_vstupu;
 		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
 		//nahodne naplneni vsech genomu;		

@@ -118,6 +118,7 @@ Lod::Lod(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vl
 }	
 
 Skudce::Skudce(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
+	//std::cout << "vytvoreni objektu Skudce: " << pozice_x << " " << pozice_y << std::endl;
 	if(App == NULL){
 		vyska = 40;
 		sirka = 40;
@@ -125,8 +126,7 @@ Skudce::Skudce(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Obje
 	}
 	sprite.SetImage(Image);
 	vyska = Image.GetHeight();
-	sirka = Image.GetWidth();
-	//std::cout << "vytvoreni objektu Skudce" << std::endl;
+	sirka = Image.GetWidth();	
 }
 
 Strela::Strela(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y, vlastnik){

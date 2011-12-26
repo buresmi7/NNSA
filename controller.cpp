@@ -94,24 +94,24 @@ void ControllerClovek::provedAkci(){
 void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
 	v = nejblizsiVzdalenostiObjektu(2);
-	//v.push_back((double)l->getPoziceX());
-	//v.push_back((double)l->getPoziceY());
+	v.push_back((double)l->getPoziceX());
+	v.push_back((double)l->getPoziceY());
 
 	std::vector<double> vystupy;	
 	
 	vystupy = this->inteligence->update(v);
 			
-	/*if (vystupy[0] > 0.5)
+	if (vystupy[0] > 0.5)
 		l->posunLeftD();
 	else if (vystupy[1] > 0.5)
-		l->posunRightD();*/
-	/*if (vystupy[2] > 0.5)
+		l->posunRightD();
+	if (vystupy[2] > 0.5)
 		l->posunUpD();
 	else if (vystupy[3] > 0.5)
-		l->posunDownD();*/
+		l->posunDownD();
 	//std::cout<< "f: " << vystupy[2] << std::endl;
-	l->posunX(vystupy[0]);
-	l->posunY(vystupy[1]);
+	//l->posunX(vystupy[0]);
+	//l->posunY(vystupy[1]);
 	//l->posunDown();
 	//if(vystupy[4] > 0.5)
 		//l->vystrel();			
