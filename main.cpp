@@ -44,7 +44,7 @@ int tester(std::vector<double> vahy, int pocet_neuronu){
 	b->Init("raketa2.tga");
 
     // Create the main rendering window
-    sf::RenderWindow App(sf::VideoMode(400, 300, 32), "SFML Graphics");
+    sf::RenderWindow App(sf::VideoMode(600, 400, 32), "SFML Graphics");
 	App.SetFramerateLimit(40);
 
 	App.UseVerticalSync(true);

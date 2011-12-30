@@ -5,8 +5,8 @@ Space::Space(sf::RenderWindow *App){
 	this->App = App;	
 	// pokud je App == NULL => program byl spusten jako generator -> okeni system je vypnuty
 	if(App == NULL){		
-		vyska = 300;
-		sirka = 400;		
+		vyska = 400;
+		sirka = 600;		
 	}
 	else{
 		vyska = App->GetHeight();
@@ -30,11 +30,14 @@ void Space::addController(Controller *c){
 }
 void Space::ProvedKolo(){	
 	// generovani nepratel
-	if((citac)%50 == 0)
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
-	if(citac%150 == 0){
+	if((citac)%60 == 0)
+		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-52), 0), &pole));
+	if((citac)%70 == 0)
+		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-52), 0), &pole));
+	
+	if(citac%300 == 0){
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, 0, 0), &pole));
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, sirka-40, 0), &pole));
+		pole.insert(new ControllerShoraDolu(new Skudce(App, this, sirka-52, 0), &pole));
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, 180, 0), &pole));
 	}	
 	if(citac == 400)

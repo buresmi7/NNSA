@@ -1,4 +1,4 @@
-
+#include <utility>
 #include <cmath>
 #include "controller.h"
 #include "frnn.h"
@@ -52,24 +52,38 @@ std::vector<double> Controller::nejblizsiObjekty(int pocetObjektu){
 	return vysledek;
 }
 
+bool srovnej(std::pair<int, double> i,std::pair<int, double> j) { 
+	return (i.second < j.second); 
+}
+
 std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){	
-	std::vector<double> vysledek;
-	if(pole == NULL) return vysledek;
+	std::vector<double> vysledek(pocetObjektu*2);//alokace mista - pozice (vlevo - 1) a vzdalenost	
+	std::vector<std::pair<int, double> > p;
 	
 	std::set<Controller*>::iterator j;
 	for(j=pole->begin(); j!=pole->end(); j++){
+		int vlevo = -1;
+		if(this->getObjekt()->getPoziceX() < (*j)->getObjekt()->getPoziceX())
+			vlevo = 1;
 		// naplneni pole vzdalenostmi od ostatnich objektu
-		vysledek.push_back(std::sqrt((float)(std::pow((double)this->getObjekt()->getPoziceX() - (*j)->getObjekt()->getPoziceX(),2) + std::pow((double)this->getObjekt()->getPoziceY() - (*j)->getObjekt()->getPoziceY(),2))));
+		p.push_back(std::make_pair(vlevo,std::sqrt((float)(std::pow((double)this->getObjekt()->getPoziceX() - (*j)->getObjekt()->getPoziceX(),2) + std::pow((double)this->getObjekt()->getPoziceY() - (*j)->getObjekt()->getPoziceY(),2)))));		
 	}	
-	sort(vysledek.begin(),vysledek.end());
-	vysledek.erase (vysledek.begin());// vymazani prvni vzdalenosti - je nula	
+	sort(p.begin(),p.end(), srovnej);
+	p.erase(p.begin());// vymazani prvni vzdalenosti - je nula	
+
+	for(int i = 0; i < vysledek.size() && i < pocetObjektu*2; i++){
+		vysledek[i] = p[i].second;
+		vysledek[i+1] = p[i].first;
+		i++;
+	}
+
 	// doplneni pole na pozadovanou velikost a naplni je nulami
 	while(true){		
 		if(vysledek.size() > pocetObjektu)
 			break;
 		vysledek.push_back(0);
 	}
-	vysledek.erase (vysledek.begin()+pocetObjektu, vysledek.end());// vymazani prebyvajicich vzdalenosti
+	//vysledek.erase (vysledek.begin()+pocetObjektu, vysledek.end());// vymazani prebyvajicich vzdalenosti
 	/*std::cout << "serazene pole: ";
 	for(int i = 0; i < vysledek.size(); i++){
 		std::cout << vysledek[i] << " ";
@@ -95,8 +109,8 @@ void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
 	v = nejblizsiVzdalenostiObjektu(3);
 	//v = nejblizsiObjekty(4);
-	v.push_back((double)l->getPoziceX());
-	v.push_back((double)l->getPoziceY());
+	//v.push_back((double)l->getPoziceX());
+	//v.push_back((double)l->getPoziceY());
 
 	std::vector<double> vystupy;	
 	
