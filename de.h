@@ -17,20 +17,18 @@
 
 int genrand(int min, int max){return min+(rand()%(++max-min));}
 
-class DiferencialniEvoluce{
-	//vektor populace
-	std::vector<std::pair <int, FRNeuralNetwork *> > populace;
+class DiferencialniEvoluce{	
+	std::vector<std::pair <int, FRNeuralNetwork *> > populace;// vektor populace
 	std::vector<std::pair <int, FRNeuralNetwork *> > nova_populace;
 	sf::RenderWindow *App;
 	FRNeuralNetwork* best;	
 	int nej;
 	int pocet_kroku;
-
-	int ohodnoceni(FRNeuralNetwork *f){		
-		srand(1);
+	// funkce ohodnoceni, dulezita pro vybirani kvality jedincu	
+	int ohodnoceni(FRNeuralNetwork *f){	
+		srand(1);// nastaveni nahodnych cisel tak aby ohodnocovaci funkce byla vzdy stejna
 		Space s(App);	
 		Lod *l = new Lod(App, &s, 180, 150);
-		l->nastavPocitaniKolizi();
 		ControllerFRNN *c = new ControllerFRNN(l, f);			
 		s.addController(c);
 		for(int j = 0; j < pocet_kroku; j++){
@@ -41,20 +39,21 @@ class DiferencialniEvoluce{
 		return c->getSkore();
 	}
 public:
-	// NP - velikost populace
 	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_kroku, int pocet_neuronu, sf::RenderWindow *App){
 		ofstream myfile;
-		myfile.open("data.txt");
+		myfile.open("data.txt");// otevreni souboru pro zapis informaci o populacich
 		
 		this->pocet_kroku = pocet_kroku;
-		this->App = App;			
-		//tvorba populace
+		this->App = App;
+		
 		std::cout << "tvorba populace\n";
+		//tvorba populace, vytvoreni nahodnych jedincu a vypocet jejich ohodnoceni
 		for(int i = 0; i < NP; i++){			
 			FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);	
 			int o = ohodnoceni(n);				
 			populace.push_back(std::make_pair(o, n));
 		}		
+		//hlavni cyklus
 		for(int k = 0; k < Generations; k++){
 			nej = -5000;
 			//krizeni
@@ -109,8 +108,7 @@ public:
 					if(o >= nej){
 						best = n;
 						nej = o;
-					}
-									
+					}									
 				}
 				else{
 					nova_populace.push_back(populace[i]);					

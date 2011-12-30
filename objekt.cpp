@@ -11,6 +11,7 @@ Objekt::Objekt(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Obje
 	this->pozice_y = pozice_y;
 	sirka = 0;
 	vyska = 0;
+	polomer = 0;
 	this->app = App;
 	space = s;
 	pocitadlo = 0;
@@ -22,6 +23,7 @@ Objekt::Objekt(const Objekt &o){
 	pozice_y = o.pozice_y;
 	sirka = o.sirka;
 	vyska = o.vyska;	
+	polomer = o.polomer;
 	sprite = o.sprite;
 	app = o.app;
 	space = o.space;
@@ -106,6 +108,7 @@ void Objekt::vystrel(){
 }
 
 Lod::Lod(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
+	polomer = 25;
 	if(App == NULL){
 		vyska = 40;
 		sirka = 40;
@@ -118,7 +121,7 @@ Lod::Lod(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vl
 }	
 
 Skudce::Skudce(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Objekt *vlastnik) : Objekt(App, s, pozice_x, pozice_y){
-	//std::cout << "vytvoreni objektu Skudce: " << pozice_x << " " << pozice_y << std::endl;
+	polomer = 25;
 	if(App == NULL){
 		vyska = 40;
 		sirka = 40;

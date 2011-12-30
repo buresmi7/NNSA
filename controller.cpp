@@ -93,7 +93,8 @@ void ControllerClovek::provedAkci(){
 
 void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
-	v = nejblizsiVzdalenostiObjektu(2);
+	v = nejblizsiVzdalenostiObjektu(3);
+	//v = nejblizsiObjekty(4);
 	v.push_back((double)l->getPoziceX());
 	v.push_back((double)l->getPoziceY());
 
@@ -111,8 +112,8 @@ void ControllerFRNN::provedAkci(){
 		l->posunDownD();
 	//std::cout<< "f: " << vystupy[2] << std::endl;
 	//l->posunX(vystupy[0]);
-	//l->posunY(vystupy[1]);
-	//l->posunDown();
+	//l->posunY(vystupy[2]);
+	//l->posunY(1);
 	//if(vystupy[4] > 0.5)
 		//l->vystrel();			
 	//std::cout << "***pozice: " << this->getObjekt()->getPoziceX() << "-" << this->getObjekt()->getPoziceY() << ", skore: " << this->getSkore() << "\n";

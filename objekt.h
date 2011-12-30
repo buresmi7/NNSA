@@ -13,6 +13,7 @@ class Objekt{
 protected:
 	double pozice_x;
 	double pozice_y;
+	int polomer;
 	int sirka;
 	int vyska;
 	bool pocitej_kolize;
@@ -32,6 +33,7 @@ public:
 	sf::Sprite getSprite();
 	double getPoziceX();
 	double getPoziceY();
+	int getPolomer(){return polomer;};
 	void posunLeft();
 	void posunRight();
 	void posunUp();

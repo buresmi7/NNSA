@@ -1,4 +1,5 @@
 #include "space.h"
+#include <cmath>
 
 Space::Space(sf::RenderWindow *App){	
 	this->App = App;	
@@ -25,49 +26,22 @@ void Space::addController(Controller *c){
 	c->addPoleObjektu(&pole);
 	nove.insert(c);
 }bool Space::CircleTest(Objekt *a, Objekt *b){
-	return (abs(a->getPoziceX() - b->getPoziceX()) * 2 < (80)) &&
-         (abs(a->getPoziceY() - b->getPoziceY()) * 2 < (80));
+	return std::sqrt((float)(std::pow((double)a->getPoziceX() - b->getPoziceX(),2) + std::pow((double)a->getPoziceY() - b->getPoziceY(),2))) < a->getPolomer() + b->getPolomer();
 }
 void Space::ProvedKolo(){	
-		
-	// vygenerovani objektu a jejich controlleru	
-	//if(citac%80 == 0)
-		//pole.insert(new ControllerShoraDolu(new Skudce(App, this, citac-80, 0), &pole));
-	/*if((citac)%50 == 0)
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
-	if((citac)%60 == 0)
+	// generovani nepratel
+	if((citac)%50 == 0)
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
 	if(citac%150 == 0){
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, 0, 0), &pole));
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, sirka-40, 0), &pole));
 		pole.insert(new ControllerShoraDolu(new Skudce(App, this, 180, 0), &pole));
-	}*/
-	if(citac2 < 1000){
-		if(citac == 0)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 0, 0), &pole));
-		if(citac == 40)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 80, 0), &pole));
-		if(citac == 80)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 160, 0), &pole));
-		if(citac == 120)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 240, 0), &pole));
-		if(citac == 160)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 320, 0), &pole));
-
-		if(citac == 200)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 40, 0), &pole));
-		if(citac == 240)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 120, 0), &pole));
-		if(citac == 280)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 200, 0), &pole));
-		if(citac == 320)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 280, 0), &pole));
-		if(citac == 360)pole.insert(new ControllerShoraDolu(new Skudce(App, this, 360, 0), &pole));
-	}
-
-	if((citac2)%30 == 0 && citac2 > 1000)
-		pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-40), 0), &pole));
-
+	}	
 	if(citac == 400)
 		citac = 0;
 	else
 		citac++;
-	if(citac2 == 1500)
-		citac2 = 1000;
-	else
-		citac2++;
-	
+
 	
 	std::set<Controller*>::iterator ii;
 	for(ii = pole.begin(); ii != pole.end(); ++ii){
@@ -99,7 +73,7 @@ void Space::ProvedKolo(){
 			if(CircleTest((*i)->getObjekt(), (*j)->getObjekt())){
 				(*i)->prictiSkore(-1);
 				(*j)->prictiSkore(-1);				
-				if((*i)->getObjekt()->getName() == 's' && (*j)->getObjekt()->getName() == 's'){
+				/*if((*i)->getObjekt()->getName() == 's' && (*j)->getObjekt()->getName() == 's'){
 					//std::cout << "kolize dvou strel " << std::endl;
 				}
 				else if((*i)->getObjekt()->getName() == 's' || (*j)->getObjekt()->getName() == 's'){
@@ -111,6 +85,7 @@ void Space::ProvedKolo(){
 					vymaz.insert((*j));
 					//std::cout << "objekty vymazany" << std::endl;
 				}				
+				*/
 				//std::cout << "kolize ";
 			}
 		}
