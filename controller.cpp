@@ -62,9 +62,11 @@ std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){
 	
 	std::set<Controller*>::iterator j;
 	for(j=pole->begin(); j!=pole->end(); j++){
-		int vlevo = -1;
+		int vlevo = -100;
 		if(this->getObjekt()->getPoziceX() < (*j)->getObjekt()->getPoziceX())
-			vlevo = 1;
+			vlevo = 100;
+		if(this->getObjekt()->getPoziceY() < (*j)->getObjekt()->getPoziceY())
+			vlevo *= 2;
 		// naplneni pole vzdalenostmi od ostatnich objektu
 		p.push_back(std::make_pair(vlevo,std::sqrt((float)(std::pow((double)this->getObjekt()->getPoziceX() - (*j)->getObjekt()->getPoziceX(),2) + std::pow((double)this->getObjekt()->getPoziceY() - (*j)->getObjekt()->getPoziceY(),2)))));		
 	}	
@@ -116,17 +118,17 @@ void ControllerFRNN::provedAkci(){
 	
 	vystupy = this->inteligence->update(v);
 			
-	if (vystupy[0] > 0.5)
+	/*if (vystupy[0] > 0.5)
 		l->posunLeftD();
 	else if (vystupy[1] > 0.5)
 		l->posunRightD();
 	if (vystupy[2] > 0.5)
 		l->posunUpD();
 	else if (vystupy[3] > 0.5)
-		l->posunDownD();
+		l->posunDownD();*/
 	//std::cout<< "f: " << vystupy[2] << std::endl;
-	//l->posunX(vystupy[0]);
-	//l->posunY(vystupy[2]);
+	l->posunX(vystupy[0]);
+	l->posunY(vystupy[1]);
 	//l->posunY(1);
 	//if(vystupy[4] > 0.5)
 		//l->vystrel();			

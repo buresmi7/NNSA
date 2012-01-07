@@ -29,6 +29,7 @@ class DiferencialniEvoluce{
 		srand(1);// nastaveni nahodnych cisel tak aby ohodnocovaci funkce byla vzdy stejna
 		Space s(App);	
 		Lod *l = new Lod(App, &s, 180, 150);
+		l->nastavPocitaniKolizi();
 		ControllerFRNN *c = new ControllerFRNN(l, f);			
 		s.addController(c);
 		for(int j = 0; j < pocet_kroku; j++){
