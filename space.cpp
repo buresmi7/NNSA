@@ -45,7 +45,7 @@ void Space::ProvedKolo(){
 	else
 		citac++;
 
-	
+	// aktivuje vsecky controlery a provede u nich jednu akci
 	std::set<Controller*>::iterator ii;
 	for(ii = pole.begin(); ii != pole.end(); ++ii){
 		(*ii)->provedAkci();	
@@ -66,36 +66,19 @@ void Space::ProvedKolo(){
 	for(i = pole.begin(); i != pole.end(); ++i){		
 		// vymazani objektu mimo mapu
 		if((*i)->getObjekt()->getPoziceY() < 0 || (*i)->getObjekt()->getPoziceY() > vyska){
-			vymaz.insert((*i));
-			//std::cout << "objekt vymazan " << std::endl;
+			vymaz.insert((*i));			
 		}		
 		for(j = pole.begin(); j != pole.end(); ++j){
-			if((*i) == (*j))break;
-			//if((*i)->getObjekt()->pocitejKolize() == false && (*j)->getObjekt()->pocitejKolize() == false)
-				//break;
+			if((*i) == (*j))continue;
+			if((*i)->getObjekt()->pocitejKolize() == false && (*j)->getObjekt()->pocitejKolize() == false)
+				continue;
 			if(CircleTest((*i)->getObjekt(), (*j)->getObjekt())){
 				(*i)->prictiSkore(-1);
 				(*j)->prictiSkore(-1);				
-				/*if((*i)->getObjekt()->getName() == 's' && (*j)->getObjekt()->getName() == 's'){
-					//std::cout << "kolize dvou strel " << std::endl;
-				}
-				else if((*i)->getObjekt()->getName() == 's' || (*j)->getObjekt()->getName() == 's'){
-					if((*i)->getObjekt()->getVlastnik() != NULL && (*i)->getObjekt()->getVlastnik() == (*j)->getObjekt())
-						break;
-					if((*j)->getObjekt()->getVlastnik() != NULL && (*j)->getObjekt()->getVlastnik() == (*i)->getObjekt())
-						break;
-					vymaz.insert((*i));
-					vymaz.insert((*j));
-					//std::cout << "objekty vymazany" << std::endl;
-				}				
-				*/
-				//std::cout << "kolize ";
 			}
 		}
 	}
 	if(vymaz.size() != 0){
-		//std::set_difference(pole->begin(), pole->end(), vymaz.begin(), vymaz.end(), pole->begin());
-		//std::set_difference(pole.begin(), pole.end(), vymaz.begin(), vymaz.end(), std::inserter(pole, pole.end()));
 		for(ii = vymaz.begin(); ii != vymaz.end(); ++ii){
 			(*ii)->~Controller();
 			pole.erase((*ii));
