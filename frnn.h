@@ -37,7 +37,7 @@ struct FRNeuralNetwork{
 		return fMin + f * (fMax - fMin);
 	}	
 	double Sigmoid(double x){
-		return 1 / (1 + exp(-x*100));
+		return 1 / (1 + exp(-x*1));
 	}
 	double Sum(int offset, std::vector<double> vystupy, std::vector<double> vstupy){
 		double sum = 0;
@@ -63,7 +63,7 @@ public:
 			exit(1);
 		}
 		this->pocet_neuronu = pocet_neuronu;
-		pocet_vstupu = 6;		
+		pocet_vstupu = 3;		
 		delka_jednoho_neuronu = pocet_neuronu + 1 + pocet_vstupu;
 		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
 		//nahodne naplneni vsech genomu;		

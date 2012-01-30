@@ -26,9 +26,9 @@ class DiferencialniEvoluce{
 	int pocet_kroku;
 	// funkce ohodnoceni, dulezita pro vybirani kvality jedincu	
 	int ohodnoceni(FRNeuralNetwork *f){	
-		srand(1);// nastaveni nahodnych cisel tak aby ohodnocovaci funkce byla vzdy stejna
+		srand(93568);// nastaveni nahodnych cisel tak aby ohodnocovaci funkce byla vzdy stejna
 		Space s(App);	
-		Lod *l = new Lod(App, &s, 180, 150);
+		Lod *l = new Lod(App, &s, 275, 150);
 		l->nastavPocitaniKolizi();
 		ControllerFRNN *c = new ControllerFRNN(l, f);			
 		s.addController(c);
@@ -56,7 +56,7 @@ public:
 		}		
 		//hlavni cyklus
 		for(int k = 0; k < Generations; k++){
-			nej = -5000;
+			nej = -50000000;
 			//krizeni
 			std::cout << "nova populace " << k+1 << "\n";
 			for(int i = 0; i < NP; i++){				

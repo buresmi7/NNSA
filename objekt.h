@@ -17,6 +17,7 @@ protected:
 	int sirka;
 	int vyska;
 	bool pocitej_kolize;
+	int pocetPredchozichKolizi;
 	sf::Sprite sprite;	
 	sf::RenderWindow *app;//odkaz na okno do ktereho ma vykreslovat
 	Space *space;
@@ -28,6 +29,9 @@ public:
 	void nastavPocitaniKolizi(){pocitej_kolize = true;};
 	bool pocitejKolize(){return pocitej_kolize;};
 	void nastavPozici(int x, int y);
+	void melKolizi(){pocetPredchozichKolizi++;};
+	void nemelKolizi(){pocetPredchozichKolizi = 0;};
+	int pocetKolizi(){return pocetPredchozichKolizi;};
 	void Draw();
 	sf::RenderWindow * getApp();
 	sf::Sprite getSprite();

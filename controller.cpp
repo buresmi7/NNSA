@@ -52,31 +52,33 @@ std::vector<double> Controller::nejblizsiObjekty(int pocetObjektu){
 	return vysledek;
 }
 
-bool srovnej(std::pair<int, double> i,std::pair<int, double> j) { 
+bool srovnej(std::pair<std::pair<int, int>, double> i,std::pair<std::pair<int, int>, double> j) { 
 	return (i.second < j.second); 
 }
 
 std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){	
-	std::vector<double> vysledek(pocetObjektu*2);//alokace mista - pozice (vlevo - 1) a vzdalenost	
-	std::vector<std::pair<int, double> > p;
+	std::vector<double> vysledek(pocetObjektu*3);//alokace mista - pozice (vlevo - 1) a vzdalenost	
+	std::vector<std::pair<std::pair<int, int>, double> > p;
 	
 	std::set<Controller*>::iterator j;
 	for(j=pole->begin(); j!=pole->end(); j++){
-		int vlevo = -100;
+		int vlevo = -1;
+		int nahore = -1;
 		if(this->getObjekt()->getPoziceX() < (*j)->getObjekt()->getPoziceX())
-			vlevo = 100;
+			vlevo = 1;
 		if(this->getObjekt()->getPoziceY() < (*j)->getObjekt()->getPoziceY())
-			vlevo *= 2;
+			nahore = 1;
 		// naplneni pole vzdalenostmi od ostatnich objektu
-		p.push_back(std::make_pair(vlevo,std::sqrt((float)(std::pow((double)this->getObjekt()->getPoziceX() - (*j)->getObjekt()->getPoziceX(),2) + std::pow((double)this->getObjekt()->getPoziceY() - (*j)->getObjekt()->getPoziceY(),2)))));		
+		p.push_back(std::make_pair(std::make_pair(vlevo, nahore),std::sqrt((float)(std::pow((double)this->getObjekt()->getPoziceX() - (*j)->getObjekt()->getPoziceX(),2) + std::pow((double)this->getObjekt()->getPoziceY() - (*j)->getObjekt()->getPoziceY(),2)))));		
 	}	
 	sort(p.begin(),p.end(), srovnej);
 	p.erase(p.begin());// vymazani prvni vzdalenosti - je nula	
 
-	for(int i = 0; i < vysledek.size() && i < pocetObjektu*2; i++){
+	for(int i = 0; i < vysledek.size() && i < pocetObjektu*3; i++){
 		vysledek[i] = p[i].second;
-		vysledek[i+1] = p[i].first;
-		i++;
+		vysledek[i+1] = p[i].first.first;
+		vysledek[i+1] = p[i].first.second;
+		i++;i++;
 	}
 
 	// doplneni pole na pozadovanou velikost a naplni je nulami
@@ -109,8 +111,8 @@ void ControllerClovek::provedAkci(){
 
 void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
-	v = nejblizsiVzdalenostiObjektu(3);
-	//v = nejblizsiObjekty(4);
+	v = nejblizsiVzdalenostiObjektu(1);
+	//v = nejblizsiObjekty(3);
 	//v.push_back((double)l->getPoziceX());
 	//v.push_back((double)l->getPoziceY());
 
@@ -127,8 +129,12 @@ void ControllerFRNN::provedAkci(){
 	else if (vystupy[3] > 0.5)
 		l->posunDownD();*/
 	//std::cout<< "f: " << vystupy[2] << std::endl;
-	l->posunX(vystupy[0]);
-	l->posunY(vystupy[1]);
+	l->posunX(vystupy[0]*3);
+	
+	//l->posunY(1);
+	//if(vystupy[1] < 0)
+		l->posunY(vystupy[1]*3);
+
 	//l->posunY(1);
 	//if(vystupy[4] > 0.5)
 		//l->vystrel();			

@@ -17,6 +17,7 @@ Objekt::Objekt(sf::RenderWindow *App, Space* s, int pozice_x, int pozice_y, Obje
 	pocitadlo = 0;
 	this->vlastnik = vlastnik;
 	pocitej_kolize = false;
+	pocetPredchozichKolizi = 0;
 }
 Objekt::Objekt(const Objekt &o){
 	pozice_x = o.pozice_x;
@@ -28,6 +29,7 @@ Objekt::Objekt(const Objekt &o){
 	app = o.app;
 	space = o.space;
 	pocitej_kolize = o.pocitej_kolize;
+	pocetPredchozichKolizi = o.pocetPredchozichKolizi;
 }
 void Objekt::nastavPozici(int x, int y){
 	pozice_x = x;
@@ -90,11 +92,11 @@ void Objekt::posun(int x, int y){
 }
 void Objekt::posunX(double x){
 	if(pozice_x > 0 && pozice_x < space->getSirka() - sirka)
-		pozice_x += 2*x;
+		pozice_x += x;
 }
 void Objekt::posunY(double y){
 	if(pozice_y > 0 && pozice_y < space->getVyska() - vyska - 50)
-		pozice_y += 2*y;
+		pozice_y += y;
 }
 void Objekt::otoc(){
 	sprite.SetRotation(180);

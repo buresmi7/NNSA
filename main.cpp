@@ -36,7 +36,7 @@ int tester(std::vector<double> vahy, int pocet_neuronu){
 	bool pauza = false;
 	int kola = 0;
 
-	srand(1);
+	srand(93568);
 	// nacteni obrazku - inicializace v objektech
 	Lod *a = new Lod();
 	a->Init("raketa.tga");
@@ -65,13 +65,15 @@ int tester(std::vector<double> vahy, int pocet_neuronu){
 	FRNeuralNetwork f(pocet_neuronu);
 	f.nastavVahy(vahy);
 
-	Lod l(&App, &space, 180, 150);
+	Lod l(&App, &space, 275, 150);
 	l.nastavPocitaniKolizi();
 
 	ControllerFRNN *c = new ControllerFRNN(&l, &f);
 	//ControllerFRNN *c = new ControllerFRNN(new Lod(&App, &space, 200, 150), new FRNeuralNetwork());
 	//ControllerClovek *c = new ControllerClovek(new Lod(&App, &space, 200, 150));
 	space.addController(c);
+
+	std::cout << "Kolo: " << kola << " Hodnoceni: " << c->getSkore() << "\n";
 
     // Start game loop
     while (App.IsOpened())
@@ -97,9 +99,10 @@ int tester(std::vector<double> vahy, int pocet_neuronu){
 			App.Draw(PauzaText);
 		}
 		else if(zacni){
+			kola++;
 			space.ProvedKolo();
 			space.VykresliVsechny();
-			std::cout<< "body: " << c->getSkore() << "\n";
+			std::cout << "Kolo: " << kola << " Hodnoceni: " << c->getSkore() << "\n";
 		}
 		else{
 			App.Draw(UvodniText);
