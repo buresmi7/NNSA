@@ -98,20 +98,20 @@ std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){
 void ControllerClovek::provedAkci(){
 	const sf::Input& Input = l->getApp()->GetInput();
 	if (Input.IsKeyDown(sf::Key::Left))
-		l->posunLeftD();
+		l->posunX(-2);
 	if (Input.IsKeyDown(sf::Key::Right))
-		l->posunRightD();
+		l->posunX(2);
 	if (Input.IsKeyDown(sf::Key::Up))
-		l->posunUpD();
+		l->posunY(-2);
 	if (Input.IsKeyDown(sf::Key::Down))
-		l->posunDownD();
+		l->posunY(2);
 	if(Input.IsKeyDown(sf::Key::Space))
-		l->vystrel();			
+		l->vystrel();				
 }
 
 void ControllerFRNN::provedAkci(){
 	std::vector<double> v;
-	v = nejblizsiVzdalenostiObjektu(1);
+	v = nejblizsiVzdalenostiObjektu(2);
 	//v = nejblizsiObjekty(3);
 	//v.push_back((double)l->getPoziceX());
 	//v.push_back((double)l->getPoziceY());
@@ -119,25 +119,14 @@ void ControllerFRNN::provedAkci(){
 	std::vector<double> vystupy;	
 	
 	vystupy = this->inteligence->update(v);
-			
-	/*if (vystupy[0] > 0.5)
-		l->posunLeftD();
-	else if (vystupy[1] > 0.5)
-		l->posunRightD();
-	if (vystupy[2] > 0.5)
-		l->posunUpD();
-	else if (vystupy[3] > 0.5)
-		l->posunDownD();*/
-	//std::cout<< "f: " << vystupy[2] << std::endl;
-	l->posunX(vystupy[0]*3);
+				
+	if(vystupy[0] > 0.5)
+		l->posunX(vystupy[0]*2);
+	else
+		l->posunX(vystupy[0]*(-2));
 	
-	//l->posunY(1);
-	//if(vystupy[1] < 0)
-		l->posunY(vystupy[1]*3);
-
-	//l->posunY(1);
-	//if(vystupy[4] > 0.5)
-		//l->vystrel();			
+	l->posunY(1);
+	l->posunY(vystupy[1]*(-3));		
 	//std::cout << "***pozice: " << this->getObjekt()->getPoziceX() << "-" << this->getObjekt()->getPoziceY() << ", skore: " << this->getSkore() << "\n";
 }
 
