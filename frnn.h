@@ -63,7 +63,7 @@ public:
 			exit(1);
 		}
 		this->pocet_neuronu = pocet_neuronu;
-		pocet_vstupu = 3;		
+		pocet_vstupu = 6;		
 		delka_jednoho_neuronu = pocet_neuronu + 1 + pocet_vstupu;
 		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
 		//nahodne naplneni vsech genomu;		
