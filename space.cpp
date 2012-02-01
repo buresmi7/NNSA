@@ -64,12 +64,12 @@ void Space::ProvedKolo(){
 	std::set<Controller*>::iterator j;
 	std::set<Controller*> vymaz;
 	for(i = pole.begin(); i != pole.end(); ++i){				
-		// vymazani objektu mimo mapu
-		if((*i)->getObjekt()->getPoziceY() < 0 || (*i)->getObjekt()->getPoziceY() > vyska){
+		// vymazani objektu za spodnim okrajem
+		if((*i)->getObjekt()->getPoziceY() > vyska){
 			vymaz.insert((*i));			
 		}	
 		// pokud je to objekt, ktery chceme ohodnocovat, a dostane se za okraj, jen mu odecteme strasne moc bodu, to ho nauci...
-		/*if((*i)->getObjekt()->getPoziceY() <= 52 || (*i)->getObjekt()->getPoziceY() >= vyska - 52 || (*i)->getObjekt()->getPoziceX() <= 52 || (*i)->getObjekt()->getPoziceX() >= sirka - 52){
+		/*if((*i)->getObjekt()->getPoziceY() < 10 || (*i)->getObjekt()->getPoziceY() > vyska - 60 || (*i)->getObjekt()->getPoziceX() < 10 || (*i)->getObjekt()->getPoziceX() > sirka - 60){
 			if((*i)->getObjekt()->pocitejKolize()){				
 				(*i)->prictiSkore(-10);
 			}						
