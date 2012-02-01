@@ -91,12 +91,24 @@ void Objekt::posun(int x, int y){
 	pozice_y += y;
 }
 void Objekt::posunX(double x){
-	if(pozice_x > 0 && pozice_x < space->getSirka() - sirka)
-		pozice_x += x;
+	if(x > 0){
+		if(pozice_x < space->getSirka() - sirka)
+			pozice_x += x;
+	}
+	else{
+		if(pozice_x > 0)
+			pozice_x += x;
+	}
 }
 void Objekt::posunY(double y){
-	if(pozice_y > 0 && pozice_y < space->getVyska() - vyska - 50)
-		pozice_y += y;
+	if(y > 0){
+		if(pozice_y < space->getVyska() - vyska -2)
+			pozice_y += y;
+	}
+	else{
+		if(pozice_y > 0)
+			pozice_y += y;
+	}
 }
 void Objekt::otoc(){
 	sprite.SetRotation(180);
