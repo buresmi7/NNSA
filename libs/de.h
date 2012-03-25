@@ -65,7 +65,8 @@ public:
 		}
 		else{
 			for(int i = 0; i < NP; i++){
-				populace.push_back((*pocatecni_populace)[i]);
+				int o = ohodnoceni((*pocatecni_populace)[i].second);	
+				populace.push_back(std::make_pair(o, (*pocatecni_populace)[i].second));
 			}
 		}
 		//hlavni cyklus
