@@ -21,6 +21,7 @@ protected:
 public:	
 	Objekt(Space *s, double pozice_x = 0, double pozice_y = 0, Objekt *vlastnik = NULL);
 	Objekt(const Objekt &o);
+	Objekt& operator=(const Objekt &o);
 	void nastavPocitaniKolizi(){pocitej_kolize = true;};
 	bool pocitejKolize(){return pocitej_kolize;};
 	void nastavPozici(int x, int y);

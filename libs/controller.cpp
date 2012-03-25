@@ -9,6 +9,14 @@ Controller::Controller(Objekt *l, std::set<Controller*> *objekty){
 	this->skore = 0;
 	this->pole = objekty;
 }
+Controller& Controller::operator=(const Controller &c){
+		if(this != &c){
+			this->l = c.l;
+			this->skore = c.skore;
+			this->pole = c.pole;
+		}
+		return *this;
+	}
 Controller::~Controller(){
 	delete l;
 }
@@ -107,46 +115,7 @@ std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){
 		vysledek[k+2] = p[i].first.second;
 		k += 3;
 	}
-
-	// doplneni pole na pozadovanou velikost a naplni je nulami
-	/*while(true){		
-		if((int)vysledek.size() > pocetObjektu)
-			break;
-		vysledek.push_back(0);
-	}*/
-	//vysledek.erase (vysledek.begin()+pocetObjektu, vysledek.end());// vymazani prebyvajicich vzdalenosti
-	/*std::cout << "serazene pole: ";
-	for(int i = 0; i < vysledek.size(); i++){
-		std::cout << vysledek[i] << " ";
-	}
-	std::cout << "\n";*/
 	return vysledek;
-}
-
-void ControllerFRNN::provedAkci(){
-	std::vector<double> v;
-	v = nejblizsiVzdalenostiObjektu(pocetSenzoru);
-	//v = nejblizsiObjekty(3);
-	//v.push_back((double)l->getPoziceX());
-	//v.push_back((double)l->getPoziceY());
-
-	std::vector<double> vystupy;	
-	
-	vystupy = this->inteligence->update(v);
-				
-	l->posunX(vystupy[0]*2);	
-	l->posunX(vystupy[1]*(-2));
-	
-	l->posunY(vystupy[2]*2);
-	l->posunY(vystupy[3]*(-2));
-
-	//l->posunY(1);
-	//l->posunY(vystupy[2]*(-3));		
-	//std::cout << "***pozice: " << this->getObjekt()->getPoziceX() << "-" << this->getObjekt()->getPoziceY() << ", skore: " << this->getSkore() << "\n";
-}
-
-void ControllerShoraDolu::provedAkci(){
-	l->posun(0, 1);
 }
 
 void ControllerStrely::provedAkci(){

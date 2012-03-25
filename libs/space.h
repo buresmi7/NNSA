@@ -19,14 +19,14 @@ class Space{
 	std::set<Controller*> pole;
 	std::set<Controller*> nove; //nove objekty, priradi se do pole az po cyklu "kola" nebot jinak to habruje s iteratorem a zmenou pole uprostred cyklu
 	int citac;
-	int citac2;
+
 	int genrand(int min, int max){return min+(rand()%(++max-min));};
 	bool CircleTest(Objekt *a, Objekt *b);
 public:
 	Space(int vyska = 400, int sirka = 600);
 	~Space();
 	void addController(Controller *c);
-	void ProvedKolo(bool generovat_nahodne);
+	void ProvedKolo();
 	void VykresliVsechny();
 	std::set<Controller*>* GetVsechnyObjekty();
 	int getVyska(){return vyska;};

@@ -18,16 +18,57 @@
 
 using namespace std;
 
+class ControllerFRNN : public Controller{	
+	FRNeuralNetwork *inteligence;
+public:
+	ControllerFRNN(Objekt *l, FRNeuralNetwork *i) : Controller(l){
+		inteligence = i;
+	};
+	void provedAkci(){
+		std::vector<double> v = nejblizsiVzdalenostiObjektu(3);
+		std::vector<double> vystupy = this->inteligence->update(v);	
+				
+		l->posunX(vystupy[0]*2);	
+		l->posunX(vystupy[1]*(-2));	
+		l->posunY(vystupy[2]*2);
+		l->posunY(vystupy[3]*(-2));
+	};
+};
+class ControllerShoraDolu : public Controller{	
+public:
+	ControllerShoraDolu(Objekt *l) : Controller(l){};
+	void provedAkci(){
+		l->posun(0, 1);
+	};
+};
+
 // funkce ohodnoceni, dulezita pro vybirani kvality jedincu	
 int ohodnoceni(FRNeuralNetwork *f){	
 	Space *s = new Space(400,300);	
 	Lod *l = new Lod(s, 175, 150);
 	l->nastavPocitaniKolizi();
-	//f->nastavPocetVstupu(3*3);
-	ControllerFRNN *c = new ControllerFRNN(l, f, 3);			
+	ControllerFRNN *c = new ControllerFRNN(l, f);			
 	s->addController(c);
+
+	int citac = 0;
 	for(int j = 0; j < 600; j++){
-		s->ProvedKolo(true);				
+		if(citac == 0){
+			s->addController(new ControllerShoraDolu(new Skudce(s, 0, 0)));
+			s->addController(new ControllerShoraDolu(new Skudce(s, 150, 0)));
+			s->addController(new ControllerShoraDolu(new Skudce(s, 300, 0)));
+		}
+		if(citac == 100){			
+			s->addController(new ControllerShoraDolu(new Skudce(s, 75, 0)));
+			s->addController(new ControllerShoraDolu(new Skudce(s, 225, 0)));
+			s->addController(new ControllerShoraDolu(new Skudce(s, 350, 0)));
+		}
+
+		s->ProvedKolo();	
+
+		if(citac == 200)
+			citac = 0;
+		else
+			citac++;
 	}
 	int skore = c->getSkore();
 	delete s;
@@ -85,7 +126,7 @@ int main(){
 	Lod l(&space, 175, 150);
 	l.nastavPocitaniKolizi();
 
-	ControllerFRNN *c = new ControllerFRNN(&l, &f, 3);
+	ControllerFRNN *c = new ControllerFRNN(&l, &f);
 	space.addController(c);
 	
 	bool zacni = false;
@@ -147,7 +188,7 @@ int main(){
 			kola++;					
 			std::cout << "Kolo: " << kola << " Hodnoceni: " << c->getSkore() << "\n";
 
-			space.ProvedKolo(true);	
+			space.ProvedKolo();	
 			std::set<Controller*> *pole = space.GetVsechnyObjekty();
 			
 			std::set<Controller*>::iterator ii;

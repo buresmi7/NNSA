@@ -6,7 +6,6 @@ Space::Space(int sirka, int vyska){
 	this->vyska = vyska;
 	this->sirka = sirka;		
 	citac = 0;		
-	citac2 = 0;
 }
 Space::~Space(){
 	std::set<Controller*>::iterator i;
@@ -21,40 +20,7 @@ void Space::addController(Controller *c){
 bool Space::CircleTest(Objekt *a, Objekt *b){
 	return std::sqrt((float)(std::pow((double)a->getPoziceX() - b->getPoziceX(),2) + std::pow((double)a->getPoziceY() - b->getPoziceY(),2))) < a->getPolomer() + b->getPolomer();
 }
-void Space::ProvedKolo(bool generovat_nahodne = true){	
-	if(generovat_nahodne){
-		// generovani nepratel
-		/*if(citac%52 == 0)
-			pole.insert(new ControllerShoraDolu(new Skudce(this, genrand(0, sirka-52), 0), &pole));
-		//if(citac%90 == 0)
-			//pole.insert(new ControllerShoraDolu(new Skudce(App, this, genrand(0, sirka-52), 0), &pole));
-	
-		if(citac%300 == 0){
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 0, 0), &pole));
-			pole.insert(new ControllerShoraDolu(new Skudce(this, sirka-52, 0), &pole));
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 275, 0), &pole));
-		}
-		*/
-		if(citac == 0){
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 0, 0), &pole));
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 150, 0), &pole));
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 300, 0), &pole));
-			//pole.insert(new ControllerShoraDolu(new Skudce(this, 450, 0), &pole));
-			//pole.insert(new ControllerShoraDolu(new Skudce(this, 525, 0), &pole));
-		}
-		if(citac == 100){			
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 75, 0), &pole));
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 225, 0), &pole));
-			pole.insert(new ControllerShoraDolu(new Skudce(this, 350, 0), &pole));
-			//pole.insert(new ControllerShoraDolu(new Skudce(this, 375, 0), &pole));
-			//pole.insert(new ControllerShoraDolu(new Skudce(this, 525, 0), &pole));
-			
-		}
-		if(citac == 200)
-			citac = 0;
-		else
-			citac++;
-	}
+void Space::ProvedKolo(){	
 
 	// aktivuje vsecky controlery a provede u nich jednu akci
 	std::set<Controller*>::iterator ii;

@@ -23,6 +23,19 @@ Objekt::Objekt(const Objekt &o){
 	pocitej_kolize = o.pocitej_kolize;
 	pocetPredchozichKolizi = o.pocetPredchozichKolizi;
 }
+Objekt& Objekt::operator=(const Objekt &o){
+	if(this != &o){
+		pozice_x = o.pozice_x;
+		pozice_y = o.pozice_y;
+		sirka = o.sirka;
+		vyska = o.vyska;	
+		polomer = o.polomer;
+		space = o.space;
+		pocitej_kolize = o.pocitej_kolize;
+		pocetPredchozichKolizi = o.pocetPredchozichKolizi;
+	}
+	return *this;
+}
 void Objekt::nastavPozici(int x, int y){
 	pozice_x = x;
 	pozice_y = y;
