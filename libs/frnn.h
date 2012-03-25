@@ -79,7 +79,7 @@ public:
 	std::vector<double> getVahy(){
 		return vahy;
 	}
-	std::vector<double> update(std::vector<double> vstupy, bool nulovat_predchozi_vystup = false;){
+	std::vector<double> update(std::vector<double> vstupy, bool nulovat_predchozi_vystup = false){
 		// vystupy je mysleno vahy mezi neurony
 		std::vector<double> vystupy(pocet_neuronu);
 		if(nulovat_predchozi_vystup){
