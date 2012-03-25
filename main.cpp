@@ -18,6 +18,12 @@
 
 using namespace std;
 
+double nahodneCislo(double fMin, double fMax){
+	double f;
+	f = (double)rand() / RAND_MAX;		
+	return fMin + f * (fMax - fMin);
+}
+
 class ControllerFRNN : public Controller{	
 	FRNeuralNetwork *inteligence;
 public:
@@ -43,27 +49,27 @@ public:
 };
 
 // funkce ohodnoceni, dulezita pro vybirani kvality jedincu	
-int ohodnoceni(FRNeuralNetwork *f){	
-	Space *s = new Space(400,300);	
-	Lod *l = new Lod(s, 175, 150);
+int ohodnoceni2(FRNeuralNetwork *f){	
+	srand(0);
+	Space space(400,300);	
+	Lod *l = new Lod(&space, 175, 150);
 	l->nastavPocitaniKolizi();
 	ControllerFRNN *c = new ControllerFRNN(l, f);			
-	s->addController(c);
+	space.addController(c);
 
 	int citac = 0;
-	for(int j = 0; j < 600; j++){
-		if(citac == 0){
-			s->addController(new ControllerShoraDolu(new Skudce(s, 0, 0)));
-			s->addController(new ControllerShoraDolu(new Skudce(s, 150, 0)));
-			s->addController(new ControllerShoraDolu(new Skudce(s, 300, 0)));
+	for(int j = 0; j < 1000; j++){
+		if(citac%55 == 0){
+				space.addController(new ControllerShoraDolu(new Skudce(&space, nahodneCislo(0,350), 0)));
 		}
-		if(citac == 100){			
-			s->addController(new ControllerShoraDolu(new Skudce(s, 75, 0)));
-			s->addController(new ControllerShoraDolu(new Skudce(s, 225, 0)));
-			s->addController(new ControllerShoraDolu(new Skudce(s, 350, 0)));
+		if(citac%85 == 0){
+			space.addController(new ControllerShoraDolu(new Skudce(&space, nahodneCislo(0,350), 0)));
+		}
+		if(citac%105 == 0){
+			space.addController(new ControllerShoraDolu(new Skudce(&space, nahodneCislo(0,350), 0)));
 		}
 
-		s->ProvedKolo();	
+		space.ProvedKolo();	
 
 		if(citac == 200)
 			citac = 0;
@@ -71,21 +77,52 @@ int ohodnoceni(FRNeuralNetwork *f){
 			citac++;
 	}
 	int skore = c->getSkore();
-	delete s;
+	srand((unsigned int)time(0));
+	return skore;
+}
+
+int ohodnoceni(FRNeuralNetwork *f){	
+	Space space(400,300);	
+	Lod *l = new Lod(&space, 175, 150);
+	l->nastavPocitaniKolizi();
+	ControllerFRNN *c = new ControllerFRNN(l, f);			
+	space.addController(c);
+
+	int citac = 0;
+	for(int j = 0; j < 600; j++){
+		if(citac == 0){
+			space.addController(new ControllerShoraDolu(new Skudce(&space, 0, 0)));
+			space.addController(new ControllerShoraDolu(new Skudce(&space, 150, 0)));
+			space.addController(new ControllerShoraDolu(new Skudce(&space, 300, 0)));
+		}
+		if(citac == 100){			
+			space.addController(new ControllerShoraDolu(new Skudce(&space, 75, 0)));
+			space.addController(new ControllerShoraDolu(new Skudce(&space, 225, 0)));
+			space.addController(new ControllerShoraDolu(new Skudce(&space, 350, 0)));
+		}
+
+		space.ProvedKolo();	
+
+		if(citac == 200)
+			citac = 0;
+		else
+			citac++;
+	}
+	int skore = c->getSkore();
 	return skore;
 }
 
 int main(){
-	//srand((unsigned int)time(0));
+	srand((unsigned int)time(0));
 	// server cast
 	clock_t t1, t2;
 	t1 = clock();
 	// nekonstantni nastaveni generatoru nahodnych cisel
 
-	int NP = 100;
+	int NP = 200;
 	double F = 0.7; 
 	double CR = 0.3; 
-	int Generations = 100; 
+	int Generations = 30; 
 	int pocet_neuronu = 15; 
 
 	DiferencialniEvoluce *d1 = new DiferencialniEvoluce(NP, F, CR, Generations, pocet_neuronu, &ohodnoceni);
@@ -93,8 +130,8 @@ int main(){
 
 	
 	//std::vector<std::pair <int, FRNeuralNetwork *> > populace = d1->getPopulace();
-	//DiferencialniEvoluce *d2 = new DiferencialniEvoluce(NP, F, CR, Generations, pocet_neuronu, &ohodnoceni, &populace);
-	//d2->UlozNejlepsiJedinec("nejlepsi_jedinec2.txt");
+	//DiferencialniEvoluce *d2 = new DiferencialniEvoluce(NP, F, CR, Generations, pocet_neuronu, &ohodnoceni2, &populace);
+	//d2->UlozNejlepsiJedinec("nejlepsi_jedinec.txt");
 
 
 	// 32bit - pretece cca po 36 minutach
@@ -160,6 +197,8 @@ int main(){
 	DalsiText.SetPosition(20, 170);
 	PauzaText.SetPosition(20, 170);
 
+	int citac = 0;
+	srand(0);
     // Start game loop
     while (App.IsOpened())
     {
@@ -188,7 +227,36 @@ int main(){
 			kola++;					
 			std::cout << "Kolo: " << kola << " Hodnoceni: " << c->getSkore() << "\n";
 
+			if(citac == 0){
+				space.addController(new ControllerShoraDolu(new Skudce(&space, 0, 0)));
+				space.addController(new ControllerShoraDolu(new Skudce(&space, 150, 0)));
+				space.addController(new ControllerShoraDolu(new Skudce(&space, 300, 0)));
+			}
+			if(citac == 100){			
+				space.addController(new ControllerShoraDolu(new Skudce(&space, 75, 0)));
+				space.addController(new ControllerShoraDolu(new Skudce(&space, 225, 0)));
+				space.addController(new ControllerShoraDolu(new Skudce(&space, 350, 0)));
+			}
+			/*if(citac%55 == 0){
+				space.addController(new ControllerShoraDolu(new Skudce(&space, nahodneCislo(0,350), 0)));
+			}
+			if(citac%85 == 0){
+				space.addController(new ControllerShoraDolu(new Skudce(&space, nahodneCislo(0,350), 0)));
+			}
+			if(citac%105 == 0){
+				space.addController(new ControllerShoraDolu(new Skudce(&space, nahodneCislo(0,350), 0)));
+			}*/
+
 			space.ProvedKolo();	
+
+			if(citac == 200)
+				citac = 0;
+			else
+				citac++;
+
+
+
+
 			std::set<Controller*> *pole = space.GetVsechnyObjekty();
 			
 			std::set<Controller*>::iterator ii;
