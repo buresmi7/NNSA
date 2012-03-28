@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -70,11 +72,57 @@ public:
 			vahy.push_back(nahodneCislo(-1, 1));
 		}
 	}
+	FRNeuralNetwork(char * soubor){
+		// nacteni vstupniho souboru		
+		double s;
+		ifstream infile;
+		infile.open (soubor);
+		infile >> s;
+		this->pocet_neuronu = (int)s;
+		while(!infile.eof()){
+			infile >> s;		
+			this->vahy.push_back(s);
+			//cout << s << endl;
+		}
+		infile.close();	
+
+		//predchozi vystup
+		pre_vystupy = std::vector<double>(pocet_neuronu, 0);
+
+		pocet_vystupu = 5;
+		pocet_vstupu = 9;
+
+		if(pocet_neuronu < pocet_vystupu){
+			std::cout << "chyba!!! pocet neuronu je mensi nez pocet vystupu" << std::endl;
+			exit(1);
+		}
+		this->pocet_vstupu = pocet_vstupu;		
+		delka_jednoho_neuronu = pocet_neuronu + 1 + pocet_vstupu;
+		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
+		//nahodne naplneni vsech genomu;		
+		for(int i = 0; i < delka_genomu; i++){
+			vahy.push_back(nahodneCislo(-1, 1));
+		}
+	}
 	int getDelkaGenomu(){
 		return delka_genomu;
 	}
 	void nastavVahy(std::vector<double> v){
 		vahy = v;
+	}
+	void nactiVahyZeSouboru(char * soubor){
+		// nacteni vstupniho souboru		
+		double s;
+		ifstream infile;
+		infile.open (soubor);
+		infile >> s;
+		//int pocet_neuronu = (int)s;
+		while(!infile.eof()){
+			infile >> s;		
+			this->vahy.push_back(s);
+			//cout << s << endl;
+		}
+		infile.close();	
 	}
 	std::vector<double> getVahy(){
 		return vahy;
