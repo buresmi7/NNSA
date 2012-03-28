@@ -18,7 +18,7 @@ void Space::addController(Controller *c){
 	this->nove.insert(c);
 }
 bool Space::CircleTest(Objekt *a, Objekt *b){
-	return std::sqrt((float)(std::pow((double)a->getPoziceX() - b->getPoziceX(),2) + std::pow((double)a->getPoziceY() - b->getPoziceY(),2))) < a->getPolomer() + b->getPolomer();
+	return std::sqrt((float)(std::pow((double)a->getPoziceX()+a->getSirka()/2 - b->getPoziceX()-b->getSirka()/2,2) + std::pow((double)a->getPoziceY()+a->getVyska()/2 - b->getPoziceY()-b->getVyska()/2,2))) < a->getPolomer() + b->getPolomer();
 }
 void Space::ProvedKolo(){	
 
@@ -45,6 +45,10 @@ void Space::ProvedKolo(){
 		if((*i)->getObjekt()->getPoziceY() > vyska){
 			vymaz.insert((*i));			
 		}	
+		// vymazani objektu za hornim okrajem
+		if((*i)->getObjekt()->getPoziceY() < -52){
+			vymaz.insert((*i));			
+		}
 		// pokud je to objekt, ktery chceme ohodnocovat, a dostane se za okraj, jen mu odecteme strasne moc bodu, to ho nauci...
 		/*if((*i)->getObjekt()->getPoziceY() < 10 || (*i)->getObjekt()->getPoziceY() > vyska - 60 || (*i)->getObjekt()->getPoziceX() < 10 || (*i)->getObjekt()->getPoziceX() > sirka - 60){
 			if((*i)->getObjekt()->pocitejKolize()){				
@@ -56,6 +60,19 @@ void Space::ProvedKolo(){
 			if((*i)->getObjekt()->pocitejKolize() == false && (*j)->getObjekt()->pocitejKolize() == false)// pocita kolize jen u tech objektu, u kterych chceme
 				continue;
 			if(CircleTest((*i)->getObjekt(), (*j)->getObjekt())){
+				if((*i)->getObjekt()->getName() == 's'){
+					if((*j)->getObjekt()->getName() != 's'){
+						(*i)->getObjekt()->getStrelec()->prictiSkore(10);
+						vymaz.insert((*i));
+
+						(*j)->prictiSkore(-100);
+
+						if((*j)->uberZivot() < 1)
+							vymaz.insert((*j));
+					}
+
+				}
+				
 				(*i)->getObjekt()->melKolizi();
 				(*j)->getObjekt()->melKolizi();
 
@@ -63,7 +80,7 @@ void Space::ProvedKolo(){
 				int b = (*j)->getObjekt()->pocetKolizi();
 
 				(*i)->prictiSkore(-1*a);
-				(*j)->prictiSkore(-1*b);				
+				(*j)->prictiSkore(-1*b);			
 			}
 			else{
 				// pokud nemeli objekty kolizi, tak se jim to nastavi, kvuli spravnemu pocitani

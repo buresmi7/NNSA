@@ -7,13 +7,22 @@
 Controller::Controller(Objekt *l, std::set<Controller*> *objekty){
 	this->l = l;
 	this->skore = 0;
+	this->nesmrtelnost = false;
+	this->pocet_zivotu = 1;
 	this->pole = objekty;
+}
+int Controller::uberZivot(){
+	if(!nesmrtelnost)
+		pocet_zivotu--;
+	return pocet_zivotu;
 }
 Controller& Controller::operator=(const Controller &c){
 		if(this != &c){
 			this->l = c.l;
 			this->skore = c.skore;
 			this->pole = c.pole;
+			this->pocet_zivotu = c.pocet_zivotu;
+			this->nesmrtelnost = c.nesmrtelnost;
 		}
 		return *this;
 	}
@@ -116,10 +125,6 @@ std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){
 		k += 3;
 	}
 	return vysledek;
-}
-
-void ControllerStrely::provedAkci(){
-	l->posun(0, -3);
 }
 
 

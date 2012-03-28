@@ -10,6 +10,8 @@ class Controller{
 protected:
 	Objekt *l;
 	int skore;
+	int pocet_zivotu;
+	bool nesmrtelnost;
 	std::set<Controller*> *pole;
 
 	static bool razeni(std::pair<int , int> i,std::pair<int, int> j);
@@ -25,12 +27,20 @@ public:
 	int getSkore();
 	void prictiSkore(int hodnota);
 	void addPoleObjektu(std::set<Controller*> *o);
+	int uberZivot();
+	void nastavNesmrtelnost(){nesmrtelnost = true;};
+	bool jeNesmrtelny(){return nesmrtelnost;};
 };
 
-class ControllerStrely : public Controller{
+class ControllerStrelyDolu : public Controller{
 public:
-	ControllerStrely(Objekt *l, std::set<Controller*> *o = NULL) : Controller(l, o){};	
-	void provedAkci();
+	ControllerStrelyDolu (Objekt *l, std::set<Controller*> *o = NULL) : Controller(l, o){};	
+	void provedAkci(){l->posun(0, 3);};
+};
+class ControllerStrelyNahoru : public Controller{
+public:
+	ControllerStrelyNahoru (Objekt *l, std::set<Controller*> *o = NULL) : Controller(l, o){};	
+	void provedAkci(){l->posun(0, -3);};
 };
 
 #endif

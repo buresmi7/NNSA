@@ -1,7 +1,7 @@
 #include "objekt.h"
 #include "space.h"
 
-Objekt::Objekt(Space* s, double pozice_x, double pozice_y, Objekt *vlastnik){
+Objekt::Objekt(Space* s, double pozice_x, double pozice_y){
 	this->pozice_x = pozice_x;
 	this->pozice_y = pozice_y;
 	sirka = 0;
@@ -9,7 +9,6 @@ Objekt::Objekt(Space* s, double pozice_x, double pozice_y, Objekt *vlastnik){
 	polomer = 0;
 	space = s;
 	pocitadlo = 0;
-	this->vlastnik = vlastnik;
 	pocitej_kolize = false;
 	pocetPredchozichKolizi = 0;
 }
@@ -71,15 +70,23 @@ void Objekt::posunY(double y){
 			pozice_y += y;
 	}
 }
-void Objekt::vystrel(){
-	if(pocitadlo == 0)
-		space->addController(new ControllerStrely(new Strela(space, pozice_x + sirka/2, pozice_y + 5, this)));
-	pocitadlo++;
-	if(pocitadlo == 10)
-		pocitadlo = 0;
+void Objekt::vystrel(Controller *strelec){
+	Strela *s;
+	Controller *c;
+	if(strelec->getObjekt()->getTyp() == 'z'){
+		s = new Strela(space, pozice_x+20, pozice_y - 20, strelec);
+		c = new ControllerStrelyNahoru(s);
+	}
+	else{
+		s = new Strela(space, pozice_x+20, pozice_y + 60, strelec);
+		c = new ControllerStrelyDolu(s);
+	}
+	s->nastavPocitaniKolizi();
+	space->addController(c);
+
 }
 
-Lod::Lod(Space* s, double pozice_x, double pozice_y, Objekt *vlastnik) : Objekt(s, pozice_x, pozice_y){
+Lod::Lod(Space* s, double pozice_x, double pozice_y) : Objekt(s, pozice_x, pozice_y){
 	polomer = 25;
 	vyska = 52;
 	sirka = 52;
@@ -87,16 +94,18 @@ Lod::Lod(Space* s, double pozice_x, double pozice_y, Objekt *vlastnik) : Objekt(
 	
 }	
 
-Skudce::Skudce(Space* s, double pozice_x, double pozice_y, Objekt *vlastnik) : Objekt(s, pozice_x, pozice_y){
+Skudce::Skudce(Space* s, double pozice_x, double pozice_y) : Objekt(s, pozice_x, pozice_y){
 	polomer = 25;
 	vyska = 52;
 	sirka = 52;
 	return;
 }
 
-Strela::Strela(Space* s, double pozice_x, double pozice_y, Objekt *vlastnik) : Objekt(s, pozice_x, pozice_y, vlastnik){
-	vyska = 52;
-	sirka = 52;
+Strela::Strela(Space* s, double pozice_x, double pozice_y, Controller *strelec) : Objekt(s, pozice_x, pozice_y){
+	polomer = 8;
+	vyska = 15;
+	sirka = 15;
+	this->strelec = strelec;
 	return;
 }
 
