@@ -55,25 +55,61 @@ public:
 		myfile.open("data.txt");// otevreni souboru pro zapis informaci o populacich
 		
 		if(pocatecni_populace == NULL){
-			std::cout << "tvorba populace\n";
+			double hotovo = 0;
+			int pre = 0;
+			int o = 0;
+			nejlepsi_ohodnoceni = -50000000;
+			std::cout << "Generuji novou populaci 0%";
 			//tvorba populace, vytvoreni nahodnych jedincu a vypocet jejich ohodnoceni
 			for(int i = 0; i < NP; i++){			
 				FRNeuralNetwork *n = new FRNeuralNetwork(pocet_neuronu);	
-				int o = ohodnoceni(n);				
+				o = ohodnoceni(n);				
 				populace.push_back(std::make_pair(o, n));
+
+				//zjisteni zda ma lepsi jedinec nejlepsi ohodnoceni
+				if(o >= nejlepsi_ohodnoceni){
+					nejlepsi_ohodnoceni = o;
+					nejlepsi_jedinec = n;					
+				}
+				hotovo += 100/(double)NP;	
+				if((int)hotovo > pre)
+					std::cout << "\rGeneruji novou populaci " << (int)hotovo << "%";
+				pre = (int)hotovo;
 			}		
+			// vypis vysledku populace do souboru
+			ostringstream ss;
+			ss << "populace " << 0 << "\t";
+			int p = 0;			
+			for(unsigned int j = 0; j < populace.size(); j++){
+				//std::cout << populace[j].first << " ";
+				p += populace[j].first;
+				//zapis do souboru
+				ss << populace[j].first << "\t";	
+			}								
+			myfile << ss.str() << endl;
+			std::cout << "\n -> prumer populace: " << p/NP;
+			std::cout << "\n -> nejlepsi jedinec: " << nejlepsi_ohodnoceni;
+			std::cout << "\n\n";
 		}
 		else{
+			double hotovo = 0;
+			std::cout << "Nahravam novou populaci 0%";
 			for(int i = 0; i < NP; i++){
 				int o = ohodnoceni((*pocatecni_populace)[i].second);	
 				populace.push_back(std::make_pair(o, (*pocatecni_populace)[i].second));
+				
+				hotovo += 100/(double)NP;				
+				std::cout << "\rNahravam novou populaci " << (int)hotovo << "%";
 			}
+			std::cout << "\n\n";
 		}
 		//hlavni cyklus
 		for(int k = 0; k < Generations; k++){
 			nejlepsi_ohodnoceni = -50000000;
 			//krizeni
-			std::cout << "nova populace " << k+1 << "\n";
+			std::cout << "Vytvarim novou populaci (" << k+1 << ") 0%";
+			double hotovo = 0;
+			int pre = 0;
 			for(int i = 0; i < NP; i++){				
 				//zvoleni 3 nahodnych jedincu
 				int p, d, t;
@@ -108,7 +144,11 @@ public:
 				if(nova_populace[i].first >= nejlepsi_ohodnoceni){
 					nejlepsi_ohodnoceni = nova_populace[i].first;
 					nejlepsi_jedinec = nova_populace[i].second;					
-				}	
+				}
+				hotovo += 100/(double)NP;	
+				if((int)hotovo > pre)
+					std::cout << "\rVytvarim novou populaci (" << k+1 << ") "<< (int)hotovo << "%";
+				pre = (int)hotovo;
 			}			
 			
 			// kopirovani nove populace
@@ -133,10 +173,10 @@ public:
 				ss << populace[j].first << "\t";	
 			}								
 			myfile << ss.str() << endl;
-			// vypis vysledku populace na konzoli
-			std::cout << "nejlepsi jedinec: " << nejlepsi_ohodnoceni;
-			std::cout << "\nprumer vysledne populace: " << p/NP;
-			std::cout << "\n";
+			// vypis vysledku populace na konzoli			
+			std::cout << "\n -> prumer populace: " << p/NP;
+			std::cout << "\n -> nejlepsi jedinec: " << nejlepsi_ohodnoceni;
+			std::cout << "\n\n";
 			
 		}
 		myfile.close();	
