@@ -41,6 +41,9 @@ Objekt* Controller::getObjekt(){
 void Controller::prictiSkore(int hodnota){
 	skore += hodnota;
 }
+void Controller::vystrel(Controller* strelec){
+	l->vystrel(strelec);
+}
 std::vector<double> Controller::nejblizsiObjekty(int pocetObjektu){	
 	std::vector<std::pair<double, double> > n;
 	std::vector<double> vysledek;
@@ -118,7 +121,7 @@ std::vector<double> Controller::nejblizsiVzdalenostiObjektu(int pocetObjektu){
 	p.erase(p.begin());// vymazani prvni vzdalenosti - je nula	
 
 	int k = 0;
-	for(int i = 0; i < (int)vysledek.size() && i < pocetObjektu; i++){
+	for(int i = 0; i < (int)p.size() && i < pocetObjektu; i++){
 		vysledek[k] = p[i].second;
 		vysledek[k+1] = p[i].first.first;
 		vysledek[k+2] = p[i].first.second;

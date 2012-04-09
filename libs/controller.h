@@ -30,6 +30,11 @@ public:
 	int uberZivot();
 	void nastavNesmrtelnost(){nesmrtelnost = true;};
 	bool jeNesmrtelny(){return nesmrtelnost;};
+	void nahoru(double x){l->posunY(-x);};
+	void dolu(double x){l->posunY(x);};
+	void vpravo(double x){l->posunX(x);};
+	void vlevo(double x){l->posunX(-x);};
+	void vystrel(Controller* strelec);
 };
 
 class ControllerStrelyDolu : public Controller{

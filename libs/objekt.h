@@ -69,4 +69,3 @@ public:
 	Controller *getStrelec(){return strelec;};
 };
 #endif
-

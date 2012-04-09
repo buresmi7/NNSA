@@ -48,11 +48,11 @@ class DiferencialniEvoluce{
 		treti = elements[2];
 	}
 public:
-	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_neuronu, int (*ohodnoceni)(FRNeuralNetwork *f), std::vector<std::pair <int, FRNeuralNetwork *> > *pocatecni_populace = NULL){
+	DiferencialniEvoluce(int NP, double F, double CR, int Generations, int pocet_neuronu, int (*ohodnoceni)(FRNeuralNetwork *f), char* soubor = "data.txt", std::vector<std::pair <int, FRNeuralNetwork *> > *pocatecni_populace = NULL){
 		this->pocet_neuronu = pocet_neuronu;
 		
 		ofstream myfile;
-		myfile.open("data.txt");// otevreni souboru pro zapis informaci o populacich
+		myfile.open(soubor);// otevreni souboru pro zapis informaci o populacich
 		
 		if(pocatecni_populace == NULL){
 			double hotovo = 0;
@@ -71,9 +71,10 @@ public:
 					nejlepsi_ohodnoceni = o;
 					nejlepsi_jedinec = n;					
 				}
-				hotovo += 100/(double)NP;	
-				if((int)hotovo > pre)
-					std::cout << "\rGeneruji novou populaci " << (int)hotovo << "%";
+				hotovo += 100/(double)NP;
+				if((int)hotovo%5 == 0)
+					if((int)hotovo > pre)
+						std::cout << "\rGeneruji novou populaci " << (int)hotovo << "%";
 				pre = (int)hotovo;
 			}		
 			// vypis vysledku populace do souboru
@@ -146,8 +147,9 @@ public:
 					nejlepsi_jedinec = nova_populace[i].second;					
 				}
 				hotovo += 100/(double)NP;	
-				if((int)hotovo > pre)
-					std::cout << "\rVytvarim novou populaci (" << k+1 << ") "<< (int)hotovo << "%";
+				if((int)hotovo%5 == 0)
+					if((int)hotovo > pre)
+						std::cout << "\rVytvarim novou populaci (" << k+1 << ") "<< (int)hotovo << "%";
 				pre = (int)hotovo;
 			}			
 			

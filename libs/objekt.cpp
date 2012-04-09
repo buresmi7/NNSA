@@ -52,21 +52,21 @@ void Objekt::posun(int x, int y){
 }
 void Objekt::posunX(double x){
 	if(x > 0){
-		if(pozice_x < space->getSirka() - sirka - 10)
+		if(pozice_x < space->getSirka() - sirka - 1)
 			pozice_x += x;
 	}
 	else{
-		if(pozice_x > 0 + 10)
+		if(pozice_x > 0 + 1)
 			pozice_x += x;
 	}
 }
 void Objekt::posunY(double y){
 	if(y > 0){
-		if(pozice_y < space->getVyska() - vyska - 10)
+		if(pozice_y < space->getVyska() - vyska - 1)
 			pozice_y += y;
 	}
 	else{
-		if(pozice_y > 0 + 10)
+		if(pozice_y > 0 + 1)
 			pozice_y += y;
 	}
 }
@@ -91,7 +91,7 @@ Lod::Lod(Space* s, double pozice_x, double pozice_y) : Objekt(s, pozice_x, pozic
 	vyska = 52;
 	sirka = 52;
 	return;
-	
+
 }	
 
 Skudce::Skudce(Space* s, double pozice_x, double pozice_y) : Objekt(s, pozice_x, pozice_y){
@@ -108,6 +108,3 @@ Strela::Strela(Space* s, double pozice_x, double pozice_y, Controller *strelec) 
 	this->strelec = strelec;
 	return;
 }
-
-
-
