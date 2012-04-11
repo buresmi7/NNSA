@@ -1,0 +1,60 @@
+#!/bin/bash
+./main -n nejlepsi_jedinec1.txt -d data1.txt --NP 50 --F 0.7 --CR 0.3 --generations 100 --neurons 5 --quiet 1 >> vystup1.txt
+./main -n nejlepsi_jedinec2.txt -d data2.txt --NP 50 --F 0.7 --CR 0.3 --generations 200 --neurons 5 --quiet 1 >> vystup2.txt
+./main -n nejlepsi_jedinec3.txt -d data3.txt --NP 50 --F 0.7 --CR 0.3 --generations 300 --neurons 5 --quiet 1 >> vystup3.txt
+./main -n nejlepsi_jedinec4.txt -d data4.txt --NP 50 --F 0.7 --CR 0.3 --generations 100 --neurons 10 --quiet 1 >> vystup4.txt
+./main -n nejlepsi_jedinec5.txt -d data5.txt --NP 50 --F 0.7 --CR 0.3 --generations 200 --neurons 10 --quiet 1 >> vystup5.txt
+./main -n nejlepsi_jedinec6.txt -d data6.txt --NP 50 --F 0.7 --CR 0.3 --generations 300 --neurons 10 --quiet 1 >> vystup6.txt
+./main -n nejlepsi_jedinec7.txt -d data7.txt --NP 50 --F 0.7 --CR 0.3 --generations 100 --neurons 20 --quiet 1 >> vystup7.txt
+./main -n nejlepsi_jedinec8.txt -d data8.txt --NP 50 --F 0.7 --CR 0.3 --generations 200 --neurons 20 --quiet 1 >> vystup8.txt
+./main -n nejlepsi_jedinec9.txt -d data9.txt --NP 50 --F 0.7 --CR 0.3 --generations 300 --neurons 20 --quiet 1 >> vystup9.txt
+./main -n nejlepsi_jedinec10.txt -d data10.txt --NP 50 --F 0.7 --CR 0.3 --generations 100 --neurons 30 --quiet 1 >> vystup10.txt
+./main -n nejlepsi_jedinec11.txt -d data11.txt --NP 50 --F 0.7 --CR 0.3 --generations 200 --neurons 30 --quiet 1 >> vystup11.txt
+./main -n nejlepsi_jedinec12.txt -d data12.txt --NP 50 --F 0.7 --CR 0.3 --generations 300 --neurons 30 --quiet 1 >> vystup12.txt
+
+echo "stage 1 done"
+
+./main -n nejlepsi_jedinec13.txt -d data13.txt --NP 100 --F 0.7 --CR 0.3 --generations 100 --neurons 5 --quiet 1 >> vystup13.txt
+./main -n nejlepsi_jedinec14.txt -d data14.txt --NP 100 --F 0.7 --CR 0.3 --generations 200 --neurons 5 --quiet 1 >> vystup14.txt
+./main -n nejlepsi_jedinec15.txt -d data15.txt --NP 100 --F 0.7 --CR 0.3 --generations 300 --neurons 5 --quiet 1 >> vystup15.txt
+./main -n nejlepsi_jedinec16.txt -d data16.txt --NP 100 --F 0.7 --CR 0.3 --generations 100 --neurons 10 --quiet 1 >> vystup16.txt
+./main -n nejlepsi_jedinec17.txt -d data17.txt --NP 100 --F 0.7 --CR 0.3 --generations 200 --neurons 10 --quiet 1 >> vystup17.txt
+./main -n nejlepsi_jedinec18.txt -d data18.txt --NP 100 --F 0.7 --CR 0.3 --generations 300 --neurons 10 --quiet 1 >> vystup18.txt
+./main -n nejlepsi_jedinec19.txt -d data19.txt --NP 100 --F 0.7 --CR 0.3 --generations 100 --neurons 20 --quiet 1 >> vystup19.txt
+./main -n nejlepsi_jedinec20.txt -d data20.txt --NP 100 --F 0.7 --CR 0.3 --generations 200 --neurons 20 --quiet 1 >> vystup20.txt
+./main -n nejlepsi_jedinec21.txt -d data21.txt --NP 100 --F 0.7 --CR 0.3 --generations 300 --neurons 20 --quiet 1 >> vystup21.txt
+./main -n nejlepsi_jedinec22.txt -d data22.txt --NP 100 --F 0.7 --CR 0.3 --generations 100 --neurons 30 --quiet 1 >> vystup22.txt
+./main -n nejlepsi_jedinec23.txt -d data23.txt --NP 100 --F 0.7 --CR 0.3 --generations 200 --neurons 30 --quiet 1 >> vystup23.txt
+./main -n nejlepsi_jedinec24.txt -d data24.txt --NP 100 --F 0.7 --CR 0.3 --generations 300 --neurons 30 --quiet 1 >> vystup24.txt
+
+echo "stage 2 done"
+
+./main -n nejlepsi_jedinec25.txt -d data25.txt --NP 200 --F 0.7 --CR 0.3 --generations 100 --neurons 5 --quiet 1 >> vystup25.txt
+./main -n nejlepsi_jedinec26.txt -d data26.txt --NP 200 --F 0.7 --CR 0.3 --generations 200 --neurons 5 --quiet 1 >> vystup26.txt
+./main -n nejlepsi_jedinec27.txt -d data27.txt --NP 200 --F 0.7 --CR 0.3 --generations 300 --neurons 5 --quiet 1 >> vystup27.txt
+./main -n nejlepsi_jedinec28.txt -d data28.txt --NP 200 --F 0.7 --CR 0.3 --generations 100 --neurons 10 --quiet 1 >> vystup28.txt
+./main -n nejlepsi_jedinec29.txt -d data29.txt --NP 200 --F 0.7 --CR 0.3 --generations 200 --neurons 10 --quiet 1 >> vystup29.txt
+./main -n nejlepsi_jedinec30.txt -d data30.txt --NP 200 --F 0.7 --CR 0.3 --generations 300 --neurons 10 --quiet 1 >> vystup30.txt
+./main -n nejlepsi_jedinec31.txt -d data31.txt --NP 200 --F 0.7 --CR 0.3 --generations 100 --neurons 20 --quiet 1 >> vystup31.txt
+./main -n nejlepsi_jedinec32.txt -d data32.txt --NP 200 --F 0.7 --CR 0.3 --generations 200 --neurons 20 --quiet 1 >> vystup32.txt
+./main -n nejlepsi_jedinec33.txt -d data33.txt --NP 200 --F 0.7 --CR 0.3 --generations 300 --neurons 20 --quiet 1 >> vystup33.txt
+./main -n nejlepsi_jedinec34.txt -d data34.txt --NP 200 --F 0.7 --CR 0.3 --generations 100 --neurons 30 --quiet 1 >> vystup34.txt
+./main -n nejlepsi_jedinec35.txt -d data35.txt --NP 200 --F 0.7 --CR 0.3 --generations 200 --neurons 30 --quiet 1 >> vystup35.txt
+./main -n nejlepsi_jedinec36.txt -d data36.txt --NP 200 --F 0.7 --CR 0.3 --generations 300 --neurons 30 --quiet 1 >> vystup36.txt
+
+echo "stage 3 done"
+
+./main -n nejlepsi_jedinec37.txt -d data37.txt --NP 300 --F 0.7 --CR 0.3 --generations 100 --neurons 5 --quiet 1 >> vystup37.txt
+./main -n nejlepsi_jedinec38.txt -d data38.txt --NP 300 --F 0.7 --CR 0.3 --generations 200 --neurons 5 --quiet 1 >> vystup38.txt
+./main -n nejlepsi_jedinec39.txt -d data39.txt --NP 300 --F 0.7 --CR 0.3 --generations 300 --neurons 5 --quiet 1 >> vystup39.txt
+./main -n nejlepsi_jedinec40.txt -d data40.txt --NP 300 --F 0.7 --CR 0.3 --generations 100 --neurons 10 --quiet 1 >> vystup40.txt
+./main -n nejlepsi_jedinec41.txt -d data41.txt --NP 300 --F 0.7 --CR 0.3 --generations 200 --neurons 10 --quiet 1 >> vystup41.txt
+./main -n nejlepsi_jedinec42.txt -d data42.txt --NP 300 --F 0.7 --CR 0.3 --generations 300 --neurons 10 --quiet 1 >> vystup42.txt
+./main -n nejlepsi_jedinec43.txt -d data43.txt --NP 300 --F 0.7 --CR 0.3 --generations 100 --neurons 20 --quiet 1 >> vystup43.txt
+./main -n nejlepsi_jedinec44.txt -d data44.txt --NP 300 --F 0.7 --CR 0.3 --generations 200 --neurons 20 --quiet 1 >> vystup44.txt
+./main -n nejlepsi_jedinec45.txt -d data45.txt --NP 300 --F 0.7 --CR 0.3 --generations 300 --neurons 20 --quiet 1 >> vystup45.txt
+./main -n nejlepsi_jedinec46.txt -d data46.txt --NP 300 --F 0.7 --CR 0.3 --generations 100 --neurons 30 --quiet 1 >> vystup46.txt
+./main -n nejlepsi_jedinec47.txt -d data47.txt --NP 300 --F 0.7 --CR 0.3 --generations 200 --neurons 30 --quiet 1 >> vystup47.txt
+./main -n nejlepsi_jedinec48.txt -d data48.txt --NP 300 --F 0.7 --CR 0.3 --generations 300 --neurons 30 --quiet 1 >> vystup48.txt
+
+echo "stage 4 done"

@@ -1,0 +1,412 @@
+Parametry diferencialni evoluce:
+ -> Velikost populace NP = 300
+ -> Mutacni konstanta F = 0.7
+ -> Prah krizeni CR = 0.3
+ -> Pocet generaci = 100
+ -> Pocet neuronu = 5
+Generuji novou populaci 0%
+ -> prumer populace: -941
+ -> nejlepsi jedinec: -774
+
+Vytvarim novou populaci (1) 0%
+ -> prumer populace: -807
+ -> nejlepsi jedinec: -696
+
+Vytvarim novou populaci (2) 0%
+ -> prumer populace: -721
+ -> nejlepsi jedinec: -688
+
+Vytvarim novou populaci (3) 0%
+ -> prumer populace: -717
+ -> nejlepsi jedinec: -688
+
+Vytvarim novou populaci (4) 0%
+ -> prumer populace: -716
+ -> nejlepsi jedinec: -688
+
+Vytvarim novou populaci (5) 0%
+ -> prumer populace: -708
+ -> nejlepsi jedinec: -688
+
+Vytvarim novou populaci (6) 0%
+ -> prumer populace: -697
+ -> nejlepsi jedinec: -688
+
+Vytvarim novou populaci (7) 0%
+ -> prumer populace: -694
+ -> nejlepsi jedinec: -340
+
+Vytvarim novou populaci (8) 0%
+ -> prumer populace: -691
+ -> nejlepsi jedinec: -338
+
+Vytvarim novou populaci (9) 0%
+ -> prumer populace: -688
+ -> nejlepsi jedinec: -338
+
+Vytvarim novou populaci (10) 0%
+ -> prumer populace: -688
+ -> nejlepsi jedinec: -338
+
+Vytvarim novou populaci (11) 0%
+ -> prumer populace: -686
+ -> nejlepsi jedinec: -338
+
+Vytvarim novou populaci (12) 0%
+ -> prumer populace: -684
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (13) 0%
+ -> prumer populace: -682
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (14) 0%
+ -> prumer populace: -682
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (15) 0%
+ -> prumer populace: -677
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (16) 0%
+ -> prumer populace: -676
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (17) 0%
+ -> prumer populace: -674
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (18) 0%
+ -> prumer populace: -672
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (19) 0%
+ -> prumer populace: -671
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (20) 0%
+ -> prumer populace: -671
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (21) 0%
+ -> prumer populace: -662
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (22) 0%
+ -> prumer populace: -659
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (23) 0%
+ -> prumer populace: -652
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (24) 0%
+ -> prumer populace: -651
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (25) 0%
+ -> prumer populace: -650
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (26) 0%
+ -> prumer populace: -634
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (27) 0%
+ -> prumer populace: -632
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (28) 0%
+ -> prumer populace: -627
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (29) 0%
+ -> prumer populace: -622
+ -> nejlepsi jedinec: -232
+
+Vytvarim novou populaci (30) 0%
+ -> prumer populace: -621
+ -> nejlepsi jedinec: -230
+
+Vytvarim novou populaci (31) 0%
+ -> prumer populace: -619
+ -> nejlepsi jedinec: -230
+
+Vytvarim novou populaci (32) 0%
+ -> prumer populace: -613
+ -> nejlepsi jedinec: -230
+
+Vytvarim novou populaci (33) 0%
+ -> prumer populace: -612
+ -> nejlepsi jedinec: -230
+
+Vytvarim novou populaci (34) 0%
+ -> prumer populace: -587
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (35) 0%
+ -> prumer populace: -575
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (36) 0%
+ -> prumer populace: -566
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (37) 0%
+ -> prumer populace: -565
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (38) 0%
+ -> prumer populace: -561
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (39) 0%
+ -> prumer populace: -548
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (40) 0%
+ -> prumer populace: -541
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (41) 0%
+ -> prumer populace: -538
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (42) 0%
+ -> prumer populace: -537
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (43) 0%
+ -> prumer populace: -514
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (44) 0%
+ -> prumer populace: -503
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (45) 0%
+ -> prumer populace: -500
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (46) 0%
+ -> prumer populace: -499
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (47) 0%
+ -> prumer populace: -497
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (48) 0%
+ -> prumer populace: -494
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (49) 0%
+ -> prumer populace: -491
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (50) 0%
+ -> prumer populace: -488
+ -> nejlepsi jedinec: -202
+
+Vytvarim novou populaci (51) 0%
+ -> prumer populace: -487
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (52) 0%
+ -> prumer populace: -487
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (53) 0%
+ -> prumer populace: -476
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (54) 0%
+ -> prumer populace: -475
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (55) 0%
+ -> prumer populace: -474
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (56) 0%
+ -> prumer populace: -474
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (57) 0%
+ -> prumer populace: -473
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (58) 0%
+ -> prumer populace: -470
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (59) 0%
+ -> prumer populace: -458
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (60) 0%
+ -> prumer populace: -456
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (61) 0%
+ -> prumer populace: -447
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (62) 0%
+ -> prumer populace: -442
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (63) 0%
+ -> prumer populace: -441
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (64) 0%
+ -> prumer populace: -439
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (65) 0%
+ -> prumer populace: -437
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (66) 0%
+ -> prumer populace: -412
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (67) 0%
+ -> prumer populace: -408
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (68) 0%
+ -> prumer populace: -407
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (69) 0%
+ -> prumer populace: -399
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (70) 0%
+ -> prumer populace: -398
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (71) 0%
+ -> prumer populace: -395
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (72) 0%
+ -> prumer populace: -389
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (73) 0%
+ -> prumer populace: -374
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (74) 0%
+ -> prumer populace: -369
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (75) 0%
+ -> prumer populace: -368
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (76) 0%
+ -> prumer populace: -361
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (77) 0%
+ -> prumer populace: -360
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (78) 0%
+ -> prumer populace: -359
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (79) 0%
+ -> prumer populace: -357
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (80) 0%
+ -> prumer populace: -357
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (81) 0%
+ -> prumer populace: -356
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (82) 0%
+ -> prumer populace: -356
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (83) 0%
+ -> prumer populace: -355
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (84) 0%
+ -> prumer populace: -353
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (85) 0%
+ -> prumer populace: -352
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (86) 0%
+ -> prumer populace: -352
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (87) 0%
+ -> prumer populace: -348
+ -> nejlepsi jedinec: -198
+
+Vytvarim novou populaci (88) 0%
+ -> prumer populace: -347
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (89) 0%
+ -> prumer populace: -346
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (90) 0%
+ -> prumer populace: -346
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (91) 0%
+ -> prumer populace: -342
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (92) 0%
+ -> prumer populace: -342
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (93) 0%
+ -> prumer populace: -337
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (94) 0%
+ -> prumer populace: -337
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (95) 0%
+ -> prumer populace: -335
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (96) 0%
+ -> prumer populace: -330
+ -> nejlepsi jedinec: -194
+
+Vytvarim novou populaci (97) 0%
+ -> prumer populace: -325
+ -> nejlepsi jedinec: -186
+
+Vytvarim novou populaci (98) 0%
+ -> prumer populace: -322
+ -> nejlepsi jedinec: -186
+
+Vytvarim novou populaci (99) 0%
+ -> prumer populace: -320
+ -> nejlepsi jedinec: -186
+
+Vytvarim novou populaci (100) 0%
+ -> prumer populace: -320
+ -> nejlepsi jedinec: -186
+
+Nejlepsi jedinec zapsan do souboru nejlepsi_jedinec14.txt .
+Doba behu programu: 145.42
