@@ -1,0 +1,18 @@
+#!/bin/bash
+for i in $(seq 0 9)
+do 
+./main -n nejlepsi_jedinec1${i}.txt -d data1${i}.txt --NP 100 --F 0.7 --CR 0.6 --generations 800 --neurons 10 --quiet 1 >> vystup1${i}.txt
+done
+echo "test 1 done."
+
+for i in $(seq 0 9)
+do 
+./main -n nejlepsi_jedinec2${i}.txt -d data2${i}.txt --NP 300 --F 0.7 --CR 0.6 --generations 800 --neurons 10 --quiet 1 >> vystup2${i}.txt
+done
+echo "test 2 done."
+
+for i in $(seq 0 9)
+do 
+./main -n nejlepsi_jedinec3${i}.txt -d data3${i}.txt --NP 500 --F 0.7 --CR 0.6 --generations 800 --neurons 10 --quiet 1 >> vystup3${i}.txt
+done
+echo "test 3 done."
