@@ -99,10 +99,6 @@ public:
 		this->pocet_vstupu = pocet_vstupu;		
 		delka_jednoho_neuronu = pocet_neuronu + 1 + pocet_vstupu;
 		delka_genomu = delka_jednoho_neuronu * pocet_neuronu;
-		//nahodne naplneni vsech genomu;		
-		for(int i = 0; i < delka_genomu; i++){
-			vahy.push_back(nahodneCislo(-1, 1));
-		}
 	}
 	int getDelkaGenomu(){
 		return delka_genomu;
