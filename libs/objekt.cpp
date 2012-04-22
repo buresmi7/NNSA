@@ -66,7 +66,7 @@ void Objekt::posunY(double y){
 			pozice_y += y;
 	}
 	else{
-		if(pozice_y > 0 + 1)
+		if(pozice_y > 0 + 30)
 			pozice_y += y;
 	}
 }
