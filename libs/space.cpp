@@ -62,7 +62,7 @@ void Space::ProvedKolo(){
 			if(CircleTest((*i)->getObjekt(), (*j)->getObjekt())){
 				if((*i)->getObjekt()->getName() == 's'){
 					if((*j)->getObjekt()->getName() != 's'){
-						(*i)->getObjekt()->getStrelec()->prictiSkore(10);
+						(*i)->getObjekt()->getStrelec()->prictiSkore(100);
 						vymaz.insert((*i));
 
 						(*j)->prictiSkore(-100);
